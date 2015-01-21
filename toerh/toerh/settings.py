@@ -30,6 +30,9 @@ INSTALLED_APPS = (
     'rest_framework',
     'provider',
     'provider.oauth2',
+
+    # Own apps
+    'positioningservice',
 )
 
 # Middleware classes
