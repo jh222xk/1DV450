@@ -1,0 +1,10 @@
+# Django version
+django>=1.7
+
+# API
+djangorestframework
+django-oauth2-provider
+
+# Testing
+factory_boy
+coverage
