@@ -1,0 +1,71 @@
+body {
+  display: block;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-size: 14px;
+  line-height: 1.33;
+  color: rgba(0,0,0,.8);
+  font-smoothing: antialiased;
+}
+
+.ui.menu .right.menu .dropdown:last-child .menu, .ui.menu .right.dropdown.item .menu, .ui.buttons>.ui.dropdown:last-child .menu {
+  margin-top: -1px;
+}
+
+.ui.medium.header {
+  display: inline-block !important;
+}
+
+.right {
+  float: right;
+  display: inline-block;
+}
+
+.ui.list .list > .item .header, .ui.list > .item .header {
+  margin: 0 0 .5em 0;
+}
+
+
+.site-brand {
+  color: #FFFFFF;
+  display: inline-block;
+  font-size: 2.5rem;
+  margin-top: -.2em;
+  padding: 0 0.394em 0 0.1em;
+  height: 30px;
+  vertical-align: middle;
+  width: 18.75% !important;
+  margin-right: -1.7%;
+}
+
+.site-brand  #logo {
+  color: #007f79;
+}
+
+.site-brand a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+
+#top-menu {
+  border-radius: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+#top-menu.ui.menu > .item:first-child {
+  line-height: 50px;
+  border-radius: 0;
+}
+
+#top-menu.ui.menu .item {
+  line-height: 50px;
+}
+
+
+
+

@@ -1,12 +1,19 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
+
+template_name = {'template_name': 'rest_framework/login.html'}
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
+
+    url(r'^accounts/profile/$', RedirectView.as_view(pattern_name='positioningservice:list')),
+
     # API authentication
-    url(r'^oauth2/', include('provider.oauth2.urls', namespace='oauth2')),
-    url(r'^api-auth/', include('rest_framework.urls',\
+    url(r'^$', 'django.contrib.auth.views.login', template_name, name='login'),
+    url(r'', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    url(r'', include('rest_framework.urls',\
         namespace='rest_framework')),
 
 

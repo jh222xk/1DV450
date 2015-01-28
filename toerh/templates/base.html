@@ -1,0 +1,194 @@
+{% load staticfiles %}
+{% load rest_framework %}
+
+<!doctype html>
+<!--[if lt IE 9]><html class="no-js lt-ie9" lang="sv"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="sv"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="author" href="humans.txt">
+    <link rel="icon" href="" />
+    <script type="text/javascript" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.8.0/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/site.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/default.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.8.0/semantic.min.css">
+  </head>
+  <body>
+    <div class="ui stackable fourteen column grid">
+
+      <div class="sixteen wide column" id="header-column">
+        {% include 'includes/header.html' %}
+      </div>
+
+      <div class="ui vertically padded page grid">
+        <div class="twelve column" id="main-column">
+
+          {% if 'GET' in allowed_methods %}
+            <form id="get-form" class="button-form">
+              <div class="ui orange buttons">
+                <a class="ui button" href="{{ request.get_full_path }}" rel="nofollow" title="Make a GET request on the {{ name }} resource">GET</a>
+                <div class="ui floating dropdown icon button" title="Specify a format for the GET request">
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                  {% for format in available_formats %}
+                      <div class="item">
+                        <a href="{% add_query_param request api_settings.URL_FORMAT_OVERRIDE format %}" rel="nofollow"
+                          title="Make a GET request on the {{ name }} resource with the format set to `{{ format }}`">
+                          {{ format }}
+                        </a>
+                      </div>
+                  {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </form>
+            {% endif %}
+
+            {% if options_form %}
+              <form class="button-form" action="{{ request.get_full_path }}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="{{ api_settings.FORM_METHOD_OVERRIDE }}" value="OPTIONS" />
+                <button class="ui button orange"
+                  title="Make an OPTIONS request on the {{ name }} resource">OPTIONS</button>
+              </form>
+            {% endif %}
+
+            {% if delete_form %}
+                <form class="button-form" action="{{ request.get_full_path }}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="{{ api_settings.FORM_METHOD_OVERRIDE }}" value="DELETE" />
+                  <button class="ui button red"
+                    title="Make a DELETE request on the {{ name }} resource">DELETE</button>
+                </form>
+            {% endif %}
+
+                <div class="content-main">
+                    <div class="page-header">
+                        <h1>{{ name }}</h1>
+                    </div>
+                    {% block description %}
+                        {{ description }}
+                    {% endblock %}
+                    <div class="request-info" style="clear: both" >
+                        <pre class="prettyprint"><b>{{ request.method }}</b> {{ request.get_full_path }}</pre>
+                    </div>
+                    <div class="response-info">
+                        <pre class="prettyprint"><span class="meta nocode"><b>HTTP {{ response.status_code }} {{ response.status_text }}</b>{% autoescape off %}
+{% for key, val in response_headers.items %}<b>{{ key }}:</b> <span class="lit">{{ val|break_long_headers|urlize_quoted_links }}</span>
+{% endfor %}
+</span>{{ content|urlize_quoted_links }}</pre>{% endautoescape %}
+                    </div>
+                </div>
+
+                {% if display_edit_forms %}
+
+                    {% if post_form or raw_data_post_form %}
+                        <div {% if post_form %}class="tabbable"{% endif %}>
+                            {% if post_form %}
+                                <ul class="nav nav-tabs form-switcher">
+                                    <li>
+                                        <a name='html-tab' href="#post-object-form" data-toggle="tab">HTML form</a>
+                                    </li>
+                                    <li>
+                                        <a name='raw-tab' href="#post-generic-content-form" data-toggle="tab">Raw data</a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            <div class="well tab-content">
+                                {% if post_form %}
+                                    <div class="tab-pane" id="post-object-form">
+                                        {% with form=post_form %}
+                                            <form action="{{ request.get_full_path }}"
+                                                  method="POST" enctype="multipart/form-data" class="form-horizontal" novalidate>
+                                                <fieldset>
+                                                    {{ post_form }}
+                                                    <div class="form-actions">
+                                                        <button class="btn btn-primary"
+                                                                title="Make a POST request on the {{ name }} resource">POST</button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        {% endwith %}
+                                    </div>
+                                {% endif %}
+                                <div {% if post_form %}class="tab-pane"{% endif %} id="post-generic-content-form">
+                                    {% with form=raw_data_post_form %}
+                                        <form action="{{ request.get_full_path }}" method="POST" class="form-horizontal">
+                                            <fieldset>
+                                                {% include "rest_framework/raw_data_form.html" %}
+                                                <div class="form-actions">
+                                                    <button class="btn btn-primary"
+                                                            title="Make a POST request on the {{ name }} resource">POST</button>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if put_form or raw_data_put_form or raw_data_patch_form %}
+                        <div {% if put_form %}class="tabbable"{% endif %}>
+                            {% if put_form %}
+                                <ul class="nav nav-tabs form-switcher">
+                                    <li>
+                                        <a name='html-tab' href="#put-object-form" data-toggle="tab">HTML form</a>
+                                    </li>
+                                    <li>
+                                        <a  name='raw-tab' href="#put-generic-content-form" data-toggle="tab">Raw data</a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            <div class="well tab-content">
+                                {% if put_form %}
+                                    <div class="tab-pane" id="put-object-form">
+                                        <form action="{{ request.get_full_path }}"
+                                              method="POST" enctype="multipart/form-data" class="form-horizontal" novalidate>
+                                            <fieldset>
+                                                {{ put_form }}
+                                                <div class="form-actions">
+                                                    <button class="btn btn-primary js-tooltip"
+                                                             name="{{ api_settings.FORM_METHOD_OVERRIDE }}"
+                                                            value="PUT" title="Make a PUT request on the {{ name }} resource">PUT</button>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                                <div {% if put_form %}class="tab-pane"{% endif %} id="put-generic-content-form">
+                                    {% with form=raw_data_put_or_patch_form %}
+                                        <form action="{{ request.get_full_path }}" method="POST" class="form-horizontal">
+                                            <fieldset>
+                                                {% include "rest_framework/raw_data_form.html" %}
+                                                <div class="form-actions">
+                                                    {% if raw_data_put_form %}
+                                                        <button class="btn btn-primary js-tooltip"
+                                                                 name="{{ api_settings.FORM_METHOD_OVERRIDE }}"
+                                                                value="PUT" title="Make a PUT request on the {{ name }} resource">PUT</button>
+                                                    {% endif %}
+                                                    {% if raw_data_patch_form %}
+                                                        <button class="btn btn-primary js-tooltip"
+                                                                 name="{{ api_settings.FORM_METHOD_OVERRIDE }}"
+                                                                value="PATCH" title="Make a PATCH request on the {{ name }} resource">PATCH</button>
+                                                    {% endif %}
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+        {% block content %}{% endblock %}
+      </div>
+      </div>
+    </div>
+  </body>
+</html>

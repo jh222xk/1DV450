@@ -1,9 +1,11 @@
+import base64
 from json import loads
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from rest_framework.test import APITestCase
 from rest_framework import status
-from provider.oauth2.models import Client
+from oauth2_provider.models import Application
 
 from ..models import Position
 
@@ -16,8 +18,7 @@ class UserAPITestCase(APITestCase):
 
     api_url = '/api/1.0/'
 
-    user1 = {'username': 'test', 'password': u'asdasd'}
-    user2 = {'username': 'test-user-2', 'password': u'test-password-2'}
+    user1 = {'username': 'test', 'password': 'asdasd'}
 
     def setUp(self):
         """
@@ -25,23 +26,13 @@ class UserAPITestCase(APITestCase):
         """
         self.user_obj = User.objects.create_user(
             self.user1['username'], "asd@asd.se", self.user1['password'])
-        self.user_obj2 = User.objects.create_user(
-            self.user2['username'], "user@email.com", self.user2['password'])
-        self.user_obj2.is_active = False
-        self.user_obj2.save()
-        self.client_obj = Client.objects.create(
+
+        self.client_obj = Application.objects.create(
             user=self.user_obj,
-            name="clientname",
-            url="http://app.com/",
-            redirect_uri='http://app.com/?callback',
-            client_type=0
-        )
-        self.client_obj2 = Client.objects.create(
-            user=self.user_obj2,
-            name="testclient",
-            url="http://app.com/",
-            redirect_uri='http://app.com/?callback',
-            client_type=0
+            name='clientname',
+            redirect_uris='http://app.com/ http://app.com/?callback',
+            client_type=Application.CLIENT_PUBLIC,
+            authorization_grant_type=Application.GRANT_PASSWORD
         )
 
         self.position = Position.objects.create(
@@ -51,6 +42,11 @@ class UserAPITestCase(APITestCase):
             latitude=19
         )
 
+    def tearDown(self):
+        self.user_obj.delete()
+        self.client_obj.delete()
+        self.position.delete()
+
     def get_token(self, user, client):
         """
         Method for getting oauth token
@@ -58,17 +54,17 @@ class UserAPITestCase(APITestCase):
         data = {
             'grant_type': 'password', 'username': user['username'],
             'password': user['password'], 'client_id': client.client_id,
-            'client_secret': client.client_secret
+            'client_secret': client.client_secret,
         }
 
         # Post our data to the oauth access point
-        response = self.client.post('/oauth2/access_token/', data)
+        response = self.client.post(reverse('oauth2_provider:token'), data)
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Parse the content
-        response_data = loads(response.content)
+        response_data = loads(response.content.decode("utf-8"))
 
         # Check if access_token is in our response_data
         self.assertTrue('access_token' in response_data)
@@ -86,6 +82,9 @@ class PositionTest(UserAPITestCase):
     API tests for the Positions API
     """
 
+    def test_get_position_object_returns_name(self):
+        self.assertEqual(self.position.__str__(), "Kalmar")
+
     def test_get_positions_requires_login(self):
         """
         Test method for checking that to get positions
@@ -100,24 +99,6 @@ class PositionTest(UserAPITestCase):
         # Check for error message
         self.assertEqual(
             response.data['detail'], "Authentication credentials were not provided.")
-
-    def test_get_positions_as_inactive_cant_get_positions(self):
-        """
-        Test method for checking that in_active users can not
-        get any data
-        """
-        # Get the access_token
-        self.get_token(self.user2, self.client_obj2)
-
-        # Send request to the positions API
-        response = self.client.get('%spositions/' % self.api_url)
-
-        # Check that our response is "Unauthorized"
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
-        # Check for error message
-        self.assertEqual(
-            response.data['detail'], "User inactive or deleted: %s" % self.user2["username"])
 
     def test_can_retrieve_positions(self):
         """
@@ -134,10 +115,10 @@ class PositionTest(UserAPITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Parse our response
-        response_data = loads(response.content)
+        response_data = loads(response.content.decode('utf-8'))
 
         # Check that our data is what it should be
         self.assertEqual(response_data[0]['name'], "Kalmar")
         self.assertEqual(response_data[0]['address'], "Kalmar, Sweden")
-        self.assertEqual(response_data[0]['longitude'], '56')
-        self.assertEqual(response_data[0]['latitude'], '19')
+        self.assertEqual(response_data[0]['longitude'], '56.000')
+        self.assertEqual(response_data[0]['latitude'], '19.000')

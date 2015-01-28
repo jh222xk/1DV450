@@ -3,8 +3,10 @@ django>=1.7
 
 # API
 djangorestframework
-django-oauth2-provider
+#django-oauth2-provider
+django-oauth-toolkit
 
 # Testing
 factory_boy
 coverage
+selenium
