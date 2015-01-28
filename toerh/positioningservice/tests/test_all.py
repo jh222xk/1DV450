@@ -91,7 +91,7 @@ class PositionTest(UserAPITestCase):
         requires user to be logged in
         """
         # Send request to the positions API
-        response = self.client.get('%spositions/' % self.api_url)
+        response = self.client.get(reverse('positioningservice:list'))
 
         # Check that our response is "Unauthorized"
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -109,7 +109,7 @@ class PositionTest(UserAPITestCase):
         self.get_token(self.user1, self.client_obj)
 
         # Send request to the positions API
-        response = self.client.get('%spositions/' % self.api_url)
+        response = self.client.get(reverse('positioningservice:list'))
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
