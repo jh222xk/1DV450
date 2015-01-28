@@ -10,3 +10,4 @@ django-oauth-toolkit
 factory_boy
 coverage
 selenium
+django-nose

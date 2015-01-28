@@ -33,6 +33,15 @@ REST_FRAMEWORK = {
         ('rest_framework.permissions.IsAuthenticated',)
 }
 
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=positioningservice,toerh',
+    '--cover-html'
+]
 
 # Application definition
 INSTALLED_APPS = (
@@ -46,6 +55,7 @@ INSTALLED_APPS = (
     # Third party apps
     'rest_framework',
     'oauth2_provider',
+    'django_nose',
 
     # Own apps
     'positioningservice',
