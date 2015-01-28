@@ -5,6 +5,7 @@ Django settings for toerh project.
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # Throw error if we haven't set the TOERH_DJANGO_SECRET_KEY in the environment
 assert 'TOERH_DJANGO_SECRET_KEY' in os.environ, 'Set TOERH_DJANGO_SECRET_KEY in your environment!'
@@ -15,12 +16,17 @@ DEBUG = TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['localhost']
 
+# Oauth2 settings
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
 
 # Rest framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':
-        ('rest_framework.authentication.OAuth2Authentication',
-         'rest_framework.authentication.SessionAuthentication'),
+        ('oauth2_provider.ext.rest_framework.OAuth2Authentication',
+            'rest_framework.authentication.SessionAuthentication'),
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.ModelSerializer',
     'DEFAULT_PERMISSION_CLASSES':
@@ -39,8 +45,7 @@ INSTALLED_APPS = (
 
     # Third party apps
     'rest_framework',
-    'provider',
-    'provider.oauth2',
+    'oauth2_provider',
 
     # Own apps
     'positioningservice',
@@ -69,20 +74,29 @@ DATABASES = {
     }
 }
 
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_ROOT, '../templates'),
+)
+
+print(os.path.join(PROJECT_ROOT, '../templates/'))
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, '../static'),
+)
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
 # Internationalization
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'Europe/Stockholm'
+LANGUAGE_CODE = 'sv-se'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
