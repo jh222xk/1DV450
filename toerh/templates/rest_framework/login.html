@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load rest_framework %}
+
+{% block content %}
+  <form action="{% url 'rest_framework:login' %}" role="form" class="ui error form" method="post">
+    <h3 class="ui dividing header">Login</h3>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        <div class="ui error message">
+          <p>{{ error }}</p>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="field">
+      {% if form.username.errors %}
+        <div class="ui error message">
+          <p>{{ form.username.errors|striptags }}</p>
+        </div>
+      {% endif %}
+
+      <label for="id_username">Username:</label>
+      <input type="text" name="username" maxlength="100" id="id_username" required="required"
+        {% if form.username.value %}value="{{ form.username.value }}"{% endif %}>
+    </div>
+
+    <div class="field">
+      {% if form.password.errors %}
+        <div class="ui error message">
+          <p>{{ form.password.errors|striptags }}</p>
+        </div>
+      {% endif %}
+
+      <label for="id_password">Password:</label>
+      <input type="password" name="password" maxlength="100" id="id_password" required="required">
+    </div>
+
+    <input type="hidden" name="next" value="{{ next }}" />
+
+    <button type="submit" class="ui submit button green" id="submit-id-submit">Login</button>
+  </form>
+{% endblock %}

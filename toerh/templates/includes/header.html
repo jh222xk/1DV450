@@ -1,0 +1,31 @@
+{% load rest_framework %}
+
+<nav class="ui purple inverted top menu" id="top-menu">
+<div class="ui vertically padded page grid">
+  {% if user.is_authenticated %}
+    <a href="{% url 'oauth2_provider:list' %}" class="item hide-for-mobile">
+      <i class="home icon"></i> Home
+    </a>
+  {% else %}
+    <a href="{% url 'login' %}" class="item hide-for-mobile">
+      <i class="home icon"></i> Home
+    </a>
+  {% endif %}
+  <a href="{% url 'positioningservice:list' %}" class="item hide-for-mobile">
+    <i class="marker icon"></i> Positions
+  </a>
+  {% block userlinks %}
+    <div class="right menu">
+    {% if user.is_authenticated %}
+      <div class="ui dropdown item">
+        <i class="user icon"></i>
+        <span class="hide-for-mobile">{{ user }}</span>
+          <div class="menu">
+            <a class="item" id="logout-user"><i class="power icon"></i> Logga ut</a>
+          </div>
+      </div>
+    {% endif %}
+    </div>
+  {% endblock %}
+  </div>
+</nav>

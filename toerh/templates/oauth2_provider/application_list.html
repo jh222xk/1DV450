@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load rest_framework %}
+
+{% block content %}
+<h2 class="ui large header">Your applications</h2>
+<div class="ui celled very relaxed list">
+  {% if applications %}
+    {% for application in applications %}
+      <div class="item">
+        <div class="content">
+          <a href="{{ application.get_absolute_url }}">
+            <h3 class="ui medium header">{{ application.name }}</h3>
+          </a>
+          <a class="ui button red right" href="{% url "oauth2_provider:delete" application.id %}">Delete</a>
+          <a class="ui button green right" href="{% url "oauth2_provider:update" application.id %}">Edit</a>
+        </div>
+      </div>
+      {% endfor %}
+
+    <a class="ui green button" href="{% url "oauth2_provider:register" %}">New application</a>
+    {% else %}
+      <p>
+        No applications defined.
+        <a href="{% url 'oauth2_provider:register' %}">
+          Click here
+        </a>
+        if you want to register a new one
+      </p>
+    {% endif %}
+    </div>
+{% endblock content %}
