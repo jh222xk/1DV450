@@ -16,8 +16,6 @@ class UserAPITestCase(APITestCase):
     Base API test class so we can have logged in user
     """
 
-    api_url = '/api/1.0/'
-
     user1 = {'username': 'test', 'password': 'asdasd'}
 
     def setUp(self):
