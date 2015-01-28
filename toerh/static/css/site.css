@@ -11,6 +11,16 @@ body {
   font-smoothing: antialiased;
 }
 
+.layout {
+  overflow: hidden;
+  zoom: 1;
+  box-sizing: border-box;
+}
+
+[readonly="readonly"] {
+  color: #A8A5A5 !important;
+}
+
 .ui.menu .right.menu .dropdown:last-child .menu, .ui.menu .right.dropdown.item .menu, .ui.buttons>.ui.dropdown:last-child .menu {
   margin-top: -1px;
 }
