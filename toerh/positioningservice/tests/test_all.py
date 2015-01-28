@@ -40,6 +40,13 @@ class UserAPITestCase(APITestCase):
             latitude=19
         )
 
+        self.position2 = Position.objects.create(
+            name="Stockholm",
+            address="Stockholm, Sweden",
+            longitude=12.344,
+            latitude=39.919
+        )
+
     def tearDown(self):
         self.user_obj.delete()
         self.client_obj.delete()
@@ -101,7 +108,7 @@ class PositionTest(UserAPITestCase):
     def test_can_retrieve_positions(self):
         """
         Test method for checking that authorized users can
-        get position data
+        get a list of positions
         """
         # Get our access_token
         self.get_token(self.user1, self.client_obj)
@@ -120,3 +127,47 @@ class PositionTest(UserAPITestCase):
         self.assertEqual(response_data[0]['address'], "Kalmar, Sweden")
         self.assertEqual(response_data[0]['longitude'], '56.000')
         self.assertEqual(response_data[0]['latitude'], '19.000')
+        self.assertEqual(response_data[1]['name'], "Stockholm")
+        self.assertEqual(response_data[1]['address'], "Stockholm, Sweden")
+        self.assertEqual(response_data[1]['longitude'], '12.344')
+        self.assertEqual(response_data[1]['latitude'], '39.919')
+
+
+
+    def test_can_retrieve_a_single_position(self):
+        """
+        Test for checking that authorized users can
+        get a SINGLE position
+        """
+        # Get our access_token
+        self.get_token(self.user1, self.client_obj)
+
+        # Send request to the positions API
+        response = self.client.get(reverse('positioningservice:detail', kwargs={'pk': 1}))
+
+        # Check that our response is fine
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Parse our response
+        response_data = loads(response.content.decode('utf-8'))
+
+        # Check that our data is what it should be
+        self.assertEqual(response_data['name'], "Kalmar")
+        self.assertEqual(response_data['address'], "Kalmar, Sweden")
+        self.assertEqual(response_data['longitude'], '56.000')
+        self.assertEqual(response_data['latitude'], '19.000')
+
+        # Send a new request to the positions API to get pk id 2
+        response = self.client.get(reverse('positioningservice:detail', kwargs={'pk': 2}))
+
+        # Check that our response is fine
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Parse our response
+        response_data = loads(response.content.decode('utf-8'))
+
+        # Check that our data is what it should be
+        self.assertEqual(response_data['name'], "Stockholm")
+        self.assertEqual(response_data['address'], "Stockholm, Sweden")
+        self.assertEqual(response_data['longitude'], '12.344')
+        self.assertEqual(response_data['latitude'], '39.919')
