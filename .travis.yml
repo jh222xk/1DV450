@@ -1,10 +1,6 @@
 language: python
 python:
   - "3.4"
-  - "3.3"
-  - "3.2"
-  - "3.1"
-  - "3.0"
 env:
   - DJANGO=1.7.4
   - DJANGO=1.6.10
@@ -12,9 +8,9 @@ env:
   - DJANGO=1.4.19
 install:
   - pip install -q Django==$DJANGO --use-mirrors
-  - pip install pep8 --use-mirrors
-  - pip install -q -e . --use-mirrors
-before_script:
-  - "pep8 --exclude=migrations --ignore=E501,E225 src"
+  - pip install . --use-mirrors
+branches:
+  only:
+    - master
 script:
   - python manage.py test
