@@ -14,3 +14,7 @@ branches:
     - master
 script:
   - python manage.py test
+matrix:
+  fast_finish: true
+notifications:
+  email: false
