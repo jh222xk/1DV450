@@ -30,7 +30,12 @@ REST_FRAMEWORK = {
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.ModelSerializer',
     'DEFAULT_PERMISSION_CLASSES':
-        ('rest_framework.permissions.IsAuthenticated',)
+        ('rest_framework.permissions.IsAuthenticated',),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.XMLRenderer',
+    )
 }
 
 # Use nose to run all tests
@@ -104,7 +109,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
 # Internationalization
 TIME_ZONE = 'Europe/Stockholm'
-LANGUAGE_CODE = 'sv-se'
+LANGUAGE_CODE = 'en'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
