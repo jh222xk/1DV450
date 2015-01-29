@@ -6,7 +6,7 @@ env:
   - DJANGO=1.6.10
   - DJANGO=1.5.12
   - DJANGO=1.4.19
-  -TOERH_DJANGO_SECRET_KEY='@v9c-4ymi$o6xk@m24c5hy5)7vrme6_qk_pbd*7+p(!trld@o%'
+  - TOERH_DJANGO_SECRET_KEY='@v9c-4ymi$o6xk@m24c5hy5)7vrme6_qk_pbd*7+p(!trld@o%'
 install:
   - pip install -q Django==$DJANGO
   - pip install -q -r requirements.txt
