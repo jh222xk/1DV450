@@ -18,5 +18,5 @@ urlpatterns = patterns('',
 
 
     # Positions endpoint
-    url(r'^api/1.0/positions/', include('positioningservice.urls', namespace = 'positioningservice')),
+    url(r'^api/1.0/', include('positioningservice.urls', namespace = 'positioningservice')),
 )

@@ -7,7 +7,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from oauth2_provider.models import Application
 
-from ..models import Position
+from ..models import Position, Event
 
 
 class UserAPITestCase(APITestCase):
@@ -47,6 +47,18 @@ class UserAPITestCase(APITestCase):
             latitude=39.919
         )
 
+        self.event = Event.objects.create(
+            name='Guldveckan Kalmar',
+            position=self.position,
+            user=self.user_obj
+        )
+
+        self.event2 = Event.objects.create(
+            name='DjangoCon Europe',
+            position=self.position2,
+            user=self.user_obj
+        )
+
     def tearDown(self):
         self.user_obj.delete()
         self.client_obj.delete()
@@ -82,13 +94,9 @@ class UserAPITestCase(APITestCase):
 
 
 class PositionTest(UserAPITestCase):
-
     """
     API tests for the Positions API
     """
-
-    def test_get_position_object_returns_name(self):
-        self.assertEqual(self.position.__str__(), "Kalmar")
 
     def test_get_positions_requires_login(self):
         """
@@ -96,7 +104,7 @@ class PositionTest(UserAPITestCase):
         requires user to be logged in
         """
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:list'))
+        response = self.client.get(reverse('positioningservice:positions_list'))
 
         # Check that our response is "Unauthorized"
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -114,7 +122,7 @@ class PositionTest(UserAPITestCase):
         self.get_token(self.user1, self.client_obj)
 
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:list'))
+        response = self.client.get(reverse('positioningservice:positions_list'))
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -132,6 +140,8 @@ class PositionTest(UserAPITestCase):
         self.assertEqual(response_data[1]['longitude'], '12.344')
         self.assertEqual(response_data[1]['latitude'], '39.919')
 
+        # Check events
+        self.assertEqual(response_data[0]['events'][0]['name'], "Guldveckan Kalmar")
 
 
     def test_can_retrieve_a_single_position(self):
@@ -143,7 +153,7 @@ class PositionTest(UserAPITestCase):
         self.get_token(self.user1, self.client_obj)
 
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:detail', kwargs={'pk': 1}))
+        response = self.client.get(reverse('positioningservice:positions_detail', kwargs={'pk': 1}))
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -158,7 +168,7 @@ class PositionTest(UserAPITestCase):
         self.assertEqual(response_data['latitude'], '19.000')
 
         # Send a new request to the positions API to get pk id 2
-        response = self.client.get(reverse('positioningservice:detail', kwargs={'pk': 2}))
+        response = self.client.get(reverse('positioningservice:positions_detail', kwargs={'pk': 2}))
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -171,3 +181,35 @@ class PositionTest(UserAPITestCase):
         self.assertEqual(response_data['address'], "Stockholm, Sweden")
         self.assertEqual(response_data['longitude'], '12.344')
         self.assertEqual(response_data['latitude'], '39.919')
+
+        # Check events
+        self.assertEqual(response_data['events'][0]['name'], "DjangoCon Europe")
+
+
+class EventTest(UserAPITestCase):
+    """
+    API tests for the Events API
+    """
+
+    def test_can_retrieve_events(self):
+
+        # Get our access_token
+        self.get_token(self.user1, self.client_obj)
+
+        # Send request to the positions API
+        response = self.client.get(reverse('positioningservice:events_list'))
+
+        # Check that our response is fine
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Parse our response
+        response_data = loads(response.content.decode('utf-8'))
+
+        # Check that our data is what it should be
+        self.assertEqual(response_data[0]['name'], "Guldveckan Kalmar")
+
+
+class TagTest(UserAPITestCase):
+    """
+    API tests for the Tag API
+    """
