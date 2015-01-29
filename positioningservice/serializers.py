@@ -22,7 +22,7 @@ class EventSerializer(ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('name', 'user', 'position', 'tags')
+        fields = ('name', 'tags')
 
 
 class PositionSerializer(ModelSerializer):
