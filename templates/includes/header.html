@@ -14,6 +14,12 @@
   <a href="{% url 'positioningservice:positions_list' %}" class="item hide-for-mobile">
     <i class="marker icon"></i> Positions
   </a>
+  <a href="{% url 'positioningservice:events_list' %}" class="item hide-for-mobile">
+    <i class="calendar outline icon"></i> Events
+  </a>
+  <a href="{% url 'positioningservice:tags_list' %}" class="item hide-for-mobile">
+    <i class="tags icon"></i> Tags
+  </a>
   {% block userlinks %}
     <div class="right menu">
     {% if user.is_authenticated %}

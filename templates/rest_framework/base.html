@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load rest_framework %}
+
+{% block content %}
+          {% if 'GET' in allowed_methods %}
+            <form id="get-form" class="button-form">
+              <div class="ui orange buttons">
+                <a class="ui button" href="{{ request.get_full_path }}" rel="nofollow" title="Make a GET request on the {{ name }} resource">GET</a>
+                <div class="ui floating dropdown icon button" title="Specify a format for the GET request">
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                  {% for format in available_formats %}
+                      <div class="item">
+                        <a href="{% add_query_param request api_settings.URL_FORMAT_OVERRIDE format %}" rel="nofollow"
+                          title="Make a GET request on the {{ name }} resource with the format set to `{{ format }}`">
+                          {{ format }}
+                        </a>
+                      </div>
+                  {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </form>
+            {% endif %}
+
+            {% if options_form %}
+              <form class="button-form" action="{{ request.get_full_path }}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="{{ api_settings.FORM_METHOD_OVERRIDE }}" value="OPTIONS" />
+                <button class="ui button orange"
+                  title="Make an OPTIONS request on the {{ name }} resource">OPTIONS</button>
+              </form>
+            {% endif %}
+
+            {% if delete_form %}
+                <form class="button-form" action="{{ request.get_full_path }}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="{{ api_settings.FORM_METHOD_OVERRIDE }}" value="DELETE" />
+                  <button class="ui button red"
+                    title="Make a DELETE request on the {{ name }} resource">DELETE</button>
+                </form>
+            {% endif %}
+
+                <div class="content-main">
+                    <div class="page-header">
+                        <h1>{{ name }}</h1>
+                    </div>
+                    {% block description %}
+                        {{ description }}
+                    {% endblock %}
+                    <div class="request-info" style="clear: both" >
+                        <pre class="prettyprint"><b>{{ request.method }}</b> {{ request.get_full_path }}</pre>
+                    </div>
+                    <div class="response-info">
+                        <pre class="prettyprint"><span class="meta nocode"><b>HTTP {{ response.status_code }} {{ response.status_text }}</b>{% autoescape off %}
+{% for key, val in response_headers.items %}<b>{{ key }}:</b> <span class="lit">{{ val|break_long_headers|urlize_quoted_links }}</span>
+{% endfor %}
+</span>{{ content|urlize_quoted_links }}</pre>{% endautoescape %}
+                    </div>
+                </div>
+
+            {% if display_edit_forms %}
+
+              {% if post_form or raw_data_post_form %}
+                  <div {% if post_form %}class="ui top attached tabular menu"{% endif %}>
+                    {% if post_form %}
+                      <a name='html-tab' href="#post-object-form" data-tab="first">HTML form</a>
+                      <a name='raw-tab' href="#post-generic-content-form" data-tab="second">Raw data</a>
+                    {% endif %}
+                      <div class="well tab-content">
+                          {% if post_form %}
+                              <div class="tab-pane" id="post-object-form">
+                                  {% with form=post_form %}
+                                      <form action="{{ request.get_full_path }}"
+                                            method="POST" enctype="multipart/form-data" class="form-horizontal" novalidate>
+                                          <fieldset>
+                                              {{ post_form }}
+                                              <div class="form-actions">
+                                                  <button class="btn btn-primary"
+                                                          title="Make a POST request on the {{ name }} resource">POST</button>
+                                              </div>
+                                          </fieldset>
+                                      </form>
+                                  {% endwith %}
+                              </div>
+                          {% endif %}
+                          <div {% if post_form %}class="tab-pane"{% endif %} id="post-generic-content-form">
+                              {% with form=raw_data_post_form %}
+                                  <form action="{{ request.get_full_path }}" method="POST" class="form-horizontal">
+                                      <fieldset>
+                                          {% include "rest_framework/raw_data_form.html" %}
+                                          <div class="form-actions">
+                                              <button class="btn btn-primary"
+                                                      title="Make a POST request on the {{ name }} resource">POST</button>
+                                          </div>
+                                      </fieldset>
+                                  </form>
+                              {% endwith %}
+                          </div>
+                      </div>
+                  </div>
+              {% endif %}
+
+                    {% if put_form or raw_data_put_form or raw_data_patch_form %}
+                      <div {% if put_form %}class="ui top attached tabular menu"{% endif %}>
+                        {% if put_form %}
+                          <a class="active item" data-tab="first">HTML form</a>
+                          <a class="item" data-tab="second">Raw data</a>
+                        {% endif %}
+                      </div>
+
+                      {% if put_form %}
+                        <div class="ui bottom attached active tab segment" data-tab="first" id="put-object-form">
+                          <form action="{{ request.get_full_path }}"
+                            method="POST" enctype="multipart/form-data" class="ui form" novalidate>
+                            {{ put_form }}
+                            <button class="ui button orange"
+                              name="{{ api_settings.FORM_METHOD_OVERRIDE }}"
+                              value="PUT" title="Make a PUT request on the {{ name }} resource">PUT</button>
+                          </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                {% endif %}
+{% endblock content %}

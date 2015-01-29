@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form method="post" action="{% url 'oauth2_provider:delete' application.pk %}" class="ui form">
+    <h3 class="ui dividing header">Are you sure to delete the application: "{{ application.name }}"?</h3>
+    {% csrf_token %}
+
+        <a class="ui button orange" href="{% url "oauth2_provider:list" %}">Cancel</a>
+        <input type="submit" class="ui button red" name="allow" value="Delete"/>
+      </div>
+  </form>
+{% endblock content %}
