@@ -1,12 +1,12 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from rest_framework import generics
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
 
 from .models import Position, Event, Tag
 from .serializers import PositionSerializer, EventSerializer, TagSerializer
 
 
-class PositionListView(generics.ListAPIView):
+class PositionListView(ListAPIView):
 
     """
     Returns a list of all positions.
@@ -15,7 +15,7 @@ class PositionListView(generics.ListAPIView):
     serializer_class = PositionSerializer
 
 
-class PositionDetailView(generics.RetrieveUpdateDestroyAPIView):
+class PositionDetailView(RetrieveAPIView):
 
     """
     Returns a single position.
@@ -24,19 +24,37 @@ class PositionDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PositionSerializer
 
 
-class EventListView(generics.ListAPIView):
+class EventListView(ListAPIView):
 
     """
-    Returns a list of all positions.
+    Returns a list of all events.
+    """
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+
+
+class EventDetailView(RetrieveUpdateDestroyAPIView):
+
+    """
+    Returns a single event.
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
 
-class EventDetailView(generics.RetrieveUpdateDestroyAPIView):
+class TagListView(ListAPIView):
 
     """
-    Returns a single position.
+    Returns a list of all tags.
     """
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+
+class TagDetailView(RetrieveUpdateDestroyAPIView):
+
+    """
+    Returns a single tag.
+    """
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer

@@ -3,26 +3,6 @@ from rest_framework.serializers import ModelSerializer, StringRelatedField, Hype
 from .models import Position, Event, Tag
 
 
-class EventSerializer(ModelSerializer):
-
-    """
-    Serializing all the Events
-    """
-    class Meta:
-        model = Event
-        fields = ('name', 'user', 'position')
-
-
-class PositionSerializer(ModelSerializer):
-    events = EventSerializer(many=True, read_only=True)
-    """
-    Serializing all the Positions
-    """
-    class Meta:
-        model = Position
-        fields = ('name', 'address', 'longitude', 'latitude', 'events')
-
-
 class TagSerializer(ModelSerializer):
 
     """
@@ -31,3 +11,27 @@ class TagSerializer(ModelSerializer):
     class Meta:
         model = Tag
         fields = ['name']
+
+
+class EventSerializer(ModelSerializer):
+    """
+    Serializing all the Events
+    """
+
+    tags = TagSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Event
+        fields = ('name', 'user', 'position', 'tags')
+
+
+class PositionSerializer(ModelSerializer):
+    """
+    Serializing all the Positions
+    """
+
+    events = EventSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Position
+        fields = ('name', 'address', 'longitude', 'latitude', 'events')

@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
 
-    url(r'^accounts/profile/$', RedirectView.as_view(pattern_name='positioningservice:list')),
+    url(r'^accounts/profile/$', RedirectView.as_view(pattern_name='oauth2_provider:list')),
 
     # API authentication
     url(r'^$', 'django.contrib.auth.views.login', template_name, name='login'),
@@ -17,6 +17,6 @@ urlpatterns = patterns('',
         namespace='rest_framework')),
 
 
-    # Positions endpoint
-    url(r'^api/1.0/', include('positioningservice.urls', namespace = 'positioningservice')),
+    # API endpoint
+    url(r'^api/1.0/', include('positioningservice.urls', namespace='positioningservice')),
 )

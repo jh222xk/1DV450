@@ -10,12 +10,13 @@ class Position(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return "%s (%s,%s)" % (self.name, self.longitude, self.latitude)
 
 
 class Event(models.Model):
     name = models.CharField(max_length=128)
     position = models.ForeignKey('positioningservice.Position', related_name='events')
+    tags = models.ManyToManyField('positioningservice.Tag')
     user = models.ForeignKey('auth.User', related_name='users')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -29,3 +30,6 @@ class Tag(models.Model):
     name = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
