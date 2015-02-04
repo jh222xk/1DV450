@@ -64,6 +64,7 @@ INSTALLED_APPS = (
 
     # Own apps
     'positioningservice',
+    'accounts',
 )
 
 # Middleware classes
@@ -93,12 +94,11 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, '../templates'),
 )
 
-print(os.path.join(PROJECT_ROOT, '../templates/'))
-
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 )
+
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'

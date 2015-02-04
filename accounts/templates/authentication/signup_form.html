@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form action="{% url 'register' %}" role="form" class="ui error form" method="post">
+    <h3 class="ui dividing header">Register</h3>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        <div class="ui error message">
+          <p>{{ error }}</p>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="field">
+      {% if form.username.errors %}
+        <div class="ui error message">
+          <p>{{ form.username.errors|striptags }}</p>
+        </div>
+      {% endif %}
+
+      <label for="id_username">Username:</label>
+      <input type="text" name="username" maxlength="30" id="id_username" required="required" placeholder="Username..."
+        {% if form.username.value %}value="{{ form.username.value }}"{% endif %}>
+
+        {{form.username.help_text}}
+    </div>
+
+    <div class="field">
+      {% if form.password1.errors %}
+        <div class="ui error message">
+          <p>{{ form.password1.errors|striptags }}</p>
+        </div>
+      {% endif %}
+
+      <label for="id_password1">Password:</label>
+      <input type="password" name="password1" maxlength="60" id="id_password" required="required" placeholder="Password...">
+    </div>
+
+    <div class="field">
+      {% if form.password2.errors %}
+        <div class="ui error message">
+          <p>{{ form.password2.errors|striptags }}</p>
+        </div>
+      {% endif %}
+
+      <label for="id_password2">Password confirmation:</label>
+      <input type="password" name="password2" maxlength="60" id="id_password2" required="required" placeholder="Password Again...">
+      {{form.password2.help_text}}
+    </div>
+
+    <div class="field">
+      {% if form.email.errors %}
+        <div class="ui error message">
+          <p>{{ form.email.errors|striptags }}</p>
+        </div>
+      {% endif %}
+
+      <label for="id_email">Email:</label>
+      <input type="email" name="email" maxlength="100" id="id_email" required="required" placeholder="Email...">
+    </div>
+
+    <input type="hidden" name="next" value="{{ next }}" />
+
+    <button type="submit" class="ui submit button green" id="submit-id-submit">Register</button>
+  </form>
+{% endblock content %}
