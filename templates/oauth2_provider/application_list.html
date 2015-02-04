@@ -4,6 +4,11 @@
 
 {% block content %}
 <h2 class="ui large header">Your applications</h2>
+
+  {% if messages %}
+    {% include "includes/_success_message.html" %}
+  {% endif %}
+
 <div class="ui celled very relaxed list">
   {% if applications %}
     {% for application in applications %}
