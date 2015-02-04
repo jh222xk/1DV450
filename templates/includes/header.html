@@ -27,7 +27,7 @@
         <i class="user icon"></i>
         <span class="hide-for-mobile">{{ user }}</span>
           <div class="menu">
-            <a class="item" id="logout-user"><i class="power icon"></i> Logga ut</a>
+            <a href="{% url 'rest_framework:logout' %}" class="item" id="logout-user"><i class="power icon"></i> Logout</a>
           </div>
       </div>
     {% endif %}

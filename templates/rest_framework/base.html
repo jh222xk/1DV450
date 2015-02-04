@@ -8,7 +8,8 @@
             <form id="get-form" class="button-form">
               <div class="ui orange buttons">
                 <a class="ui button" href="{{ request.get_full_path }}" rel="nofollow" title="Make a GET request on the {{ name }} resource">GET</a>
-                <div class="ui floating dropdown icon button" title="Specify a format for the GET request">
+
+                <div class="ui icon floating top right pointing dropdown button" title="Specify a format for the GET request">
                   <i class="dropdown icon"></i>
                   <div class="menu">
                   {% for format in available_formats %}
