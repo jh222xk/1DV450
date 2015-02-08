@@ -44,7 +44,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # Tell nose to measure coverage on the 'foo' and 'bar' apps
 NOSE_ARGS = [
     '--with-coverage',
-    '--cover-package=positioningservice,toerh',
+    '--cover-package=positioningservice,accounts,toerh',
     '--cover-html'
 ]
 

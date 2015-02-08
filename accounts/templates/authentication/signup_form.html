@@ -21,10 +21,8 @@
       {% endif %}
 
       <label for="id_username">Username:</label>
-      <input type="text" name="username" maxlength="30" id="id_username" required="required" placeholder="Username..."
+      <input type="text" name="username" maxlength="30" id="id_username" required="required" placeholder="Username..." data-content="{{form.username.help_text}}"
         {% if form.username.value %}value="{{ form.username.value }}"{% endif %}>
-
-        {{form.username.help_text}}
     </div>
 
     <div class="field">
@@ -46,8 +44,7 @@
       {% endif %}
 
       <label for="id_password2">Password confirmation:</label>
-      <input type="password" name="password2" maxlength="60" id="id_password2" required="required" placeholder="Password Again...">
-      {{form.password2.help_text}}
+      <input type="password" name="password2" maxlength="60" id="id_password2" required="required" placeholder="Password Again..." data-content="{{form.password2.help_text}}">
     </div>
 
     <div class="field">

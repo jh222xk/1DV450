@@ -22,7 +22,7 @@
 
     <div class="field">
       <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
-      {{ form.name }}
+      <input id="id_name" maxlength="255" name="name" required="required" type="text" value="{{ form.name.value }}" />
     </div>
 
     <div class="field">
@@ -49,6 +49,8 @@
       <label for="{{ form.authorization_grant_type.id_for_label }}">{{ form.authorization_grant_type.label }}</label>
       {{ form.authorization_grant_type }}
     </div>
+
+    <input id="id_user" type="hidden" name="user" value="{{ user.id }}">
 
     <a class="ui orange button" href="{% block app-form-back-url %}{% url "oauth2_provider:detail" application.id %}{% endblock app-form-back-url %}">
       Go back
