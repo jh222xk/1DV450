@@ -6,36 +6,36 @@
 {% block content %}
 
   {% if user.is_authenticated %}
-<div class="ui info message">
-    <i class="close icon"></i>
-    <div class="header">
-      Using the API endpoints
-    </div>
-    <p>
-      For GET data from the API, POST, PUT, DELETE and so on you need to send authorization token like so:
-    </p>
+    <div class="ui info message">
+      <i class="close icon"></i>
+      <div class="header">
+        Using the API endpoints
+      </div>
+      <p>
+        For GET data from the API, POST, PUT, DELETE and so on you need to send authorization token like so:
+      </p>
 
-    <p>
-      <strong>curl -X GET http://127.0.0.1:8000/api/v1/positions/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'</strong>
-    </p>
-  </div>
+      <p>
+        <strong>curl -X GET http://127.0.0.1:8000/api/v1/positions/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'</strong>
+      </p>
+    </div>
   {% else %}
-  <div class="ui info message">
-    <i class="close icon"></i>
-    <div class="header">
-      Using the API endpoints
+    <div class="ui info message">
+      <i class="close icon"></i>
+      <div class="header">
+        Using the API endpoints
+      </div>
+      <p>
+        For GET data from the API, POST, PUT, DELETE and so on you need to be authenticated.
+      </p>
+      <p>Register your account <a href="{% url 'register' %}">here</a>.</p>
+
+      <p>After successfully set up your account you can make requests as follows: </p>
+
+      <p>
+        <strong>curl -X GET http://127.0.0.1:8000/api/v1/positions/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'</strong>
+      </p>
     </div>
-    <p>
-      For GET data from the API, POST, PUT, DELETE and so on you need to be authenticated.
-    </p>
-    <p>Register your account <a href="{% url 'register' %}">here</a>.</p>
-
-    <p>After successfully set up your account you can make requests as follows: </p>
-
-    <p>
-      <strong>curl -X GET http://127.0.0.1:8000/api/v1/positions/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'</strong>
-    </p>
-  </div>
   {% endif %}
           {% if 'GET' in allowed_methods %}
             <form id="get-form" class="button-form">
