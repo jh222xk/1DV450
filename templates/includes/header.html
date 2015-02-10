@@ -3,7 +3,7 @@
 <nav class="ui purple inverted top menu" id="top-menu">
 <div class="ui vertically padded page grid">
   {% if user.is_authenticated %}
-    <a href="{% url 'oauth2_provider:list' %}" class="item hide-for-mobile">
+    <a href="{% url 'tokens:list' %}" class="item hide-for-mobile">
       <i class="home icon"></i> Home
     </a>
   {% else %}

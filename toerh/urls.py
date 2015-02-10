@@ -9,18 +9,21 @@ template_name = {'template_name': 'rest_framework/login.html'}
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
+    # Accounts
     url(r'^register/$', SignUpFormView.as_view(), name='register'),
-
-    url(r'^accounts/profile/$', RedirectView.as_view(pattern_name='oauth2_provider:list')),
+    url(r'^accounts/profile/$', RedirectView.as_view(pattern_name='tokens:list')),
     url(r'^accounts/login/$', RedirectView.as_view(pattern_name='login')),
+
+    url(r'^tokens/', include('tokens.urls', namespace='tokens')),
 
     # API authentication
     url(r'^$', 'django.contrib.auth.views.login', template_name, name='login'),
-    url(r'', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'', include('rest_framework.urls',\
         namespace='rest_framework')),
 
 
-    # API endpoint
-    url(r'^api/1.0/', include('positioningservice.urls', namespace='positioningservice')),
+    # API endpoint version 1
+    url(r'^api/v1/', include('positioningservice.urls', namespace='positioningservice')),
+
+    # Version 2 could be here
 )

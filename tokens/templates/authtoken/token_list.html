@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 class="ui large header">Your token</h2>
+
+  {% if messages %}
+    {% include "includes/_success_message.html" %}
+  {% endif %}
+
+<div class="ui celled very relaxed list">
+  {% for token in tokens %}
+    <div class="item">
+      <div class="content">
+        <h3 class="ui medium header">{{ token.key }}</h3>
+        <a class="ui button red right" href="{% url 'tokens:delete' token.key %}">Delete</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>You dont have any tokens...</p>
+
+    <form method="post" action="{% url 'tokens:new' %}">
+      {% csrf_token %}
+      <button type="submit" class="ui button green">New token</button>
+    </form>
+  {% endfor %}
+</div>
+{% endblock content %}

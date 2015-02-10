@@ -31,6 +31,9 @@ class SignUpFormView(FormView):
         user.is_active = True
         user.save()
 
+        # Token could easyly be created here if we want
+        # Token.objects.create(user=user)
+
         # Authenticate our new user
         user = authenticate(
             username=user.username,

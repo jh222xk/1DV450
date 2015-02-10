@@ -1,9 +1,9 @@
 {% for message in messages %}
-<div class="ui positive message">
-  <i class="close icon"></i>
-  <div class="header">
-    Success
+  <div class="ui {% if message.tags %}{{ message.tags }}{% endif %} message">
+    <i class="close icon"></i>
+    <div class="header">
+      {% if message.tags %}{{ message.tags|title }}{% endif %}
+    </div>
+    <p>{{ message }}</p>
   </div>
-  <p>{{ message }}</p>
-</div>
 {% endfor %}

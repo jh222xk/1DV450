@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form method="post" class="ui form">
+    {% csrf_token %}
+    Are you sure you want to delete the token "{{ object }}" ?
+    <input type="submit" value="Submit" class="ui button" />
+  </form>
+{% endblock content %}

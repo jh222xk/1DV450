@@ -25,8 +25,8 @@ OAUTH2_PROVIDER = {
 # Rest framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':
-        ('oauth2_provider.ext.rest_framework.OAuth2Authentication',
-            'rest_framework.authentication.SessionAuthentication'),
+        ('rest_framework.authentication.SessionAuthentication',
+            'rest_framework.authentication.TokenAuthentication',),
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.ModelSerializer',
     'DEFAULT_PERMISSION_CLASSES':
@@ -35,7 +35,13 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.XMLRenderer',
-    )
+    ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.UserRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '1000/day'
+    }
 }
 
 # Use nose to run all tests
@@ -59,12 +65,14 @@ INSTALLED_APPS = (
 
     # Third party apps
     'rest_framework',
-    'oauth2_provider',
+    # 'oauth2_provider',
     'django_nose',
+    'rest_framework.authtoken',
 
     # Own apps
     'positioningservice',
     'accounts',
+    'tokens'
 )
 
 # Middleware classes
