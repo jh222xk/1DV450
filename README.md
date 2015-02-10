@@ -30,3 +30,10 @@ and then the database should be just fine.
 
 ## Run it
 locate to `path/to/toerh/` then just run Python's built-in server using the command: `python manage.py runserver` and the application will be served at `http://localhost:8000/`
+
+# Using the API
+First of you need to register an account. After that sign in and create a new token.
+
+After successfully set up your account and your token you can make requests as follows:
+
+``curl -X GET http://127.0.0.1:8000/api/v1/positions/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'``
