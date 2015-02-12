@@ -44,4 +44,4 @@ After successfully set up your account and your token you can make requests as f
 
 # Admin
 
-The admin interface is located here; http://localhost:8000/admin/, login with user created when python manage.py syncdb` (superuser) was run.
+The admin interface is located at: `http://localhost:8000/admin/`, login with user created when `python manage.py syncdb` (superuser) was run.
