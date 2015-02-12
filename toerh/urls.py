@@ -29,10 +29,11 @@ urlpatterns = patterns('',
     url(r'', include('rest_framework.urls',\
         namespace='rest_framework')),
 
+    # Available API versions
     url(r'^api/$', TemplateView.as_view(template_name="api_list.html"), name='api-list'),
 
     # API endpoint version 1
     url(r'^api/v1/', include(router.urls, namespace='api-v1')),
 
-    # Version 2 could be here
+    # API endpoint version 2 could be here
 )
