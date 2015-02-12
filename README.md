@@ -6,6 +6,10 @@ Webbramverk - 1DV450
 
 # Run the application
 
+## Live
+If you can't get python to run nicely on windows or such you can view the application here:
+http://128.199.44.244:1337/
+
 ## Get the project
 First of all clone this repository: `git clone https://github.com/jh222xk/toerh.git`
 
@@ -37,3 +41,7 @@ First of you need to register an account. After that sign in and create a new to
 After successfully set up your account and your token you can make requests as follows:
 
 ``curl -X GET http://127.0.0.1:8000/api/v1/positions/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'``
+
+# Admin
+
+The admin interface is located here; http://localhost:8000/admin/, login with user created when python manage.py syncdb` (superuser) was run.

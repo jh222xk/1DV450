@@ -46,4 +46,4 @@ class SignUpFormView(FormView):
         messages.success(self.request, 'Congratulations! You are now registered and logged in!')
 
         # Redirect user to the users app list
-        return redirect(reverse('oauth2_provider:list'))
+        return redirect(reverse('tokens:list'))
