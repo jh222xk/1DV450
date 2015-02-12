@@ -4,22 +4,30 @@
 <div class="ui vertically padded page grid">
   {% if user.is_authenticated %}
     <a href="{% url 'tokens:list' %}" class="item hide-for-mobile">
-      <i class="home icon"></i> Home
+      <i class="home icon"></i> Your token
     </a>
   {% else %}
     <a href="{% url 'login' %}" class="item hide-for-mobile">
       <i class="home icon"></i> Home
     </a>
   {% endif %}
-  <a href="{% url 'positioningservice:positions_list' %}" class="item hide-for-mobile">
+
+  <a href="{% url 'api-list' %}" class="item hide-for-mobile">
+    <i class="history icon"></i> Available API versions
+  </a>
+  <a href="{% url 'api-v1:api-root' %}" class="item hide-for-mobile">
+    <i class="browser icon"></i> Available resources
+  </a>
+  <a href="{% url 'api-v1:position-list' %}" class="item hide-for-mobile">
     <i class="marker icon"></i> Positions
   </a>
-  <a href="{% url 'positioningservice:events_list' %}" class="item hide-for-mobile">
+  <a href="{% url 'api-v1:event-list' %}" class="item hide-for-mobile">
     <i class="calendar outline icon"></i> Events
   </a>
-  <a href="{% url 'positioningservice:tags_list' %}" class="item hide-for-mobile">
+  <a href="{% url 'api-v1:tag-list' %}" class="item hide-for-mobile">
     <i class="tags icon"></i> Tags
   </a>
+
   {% block userlinks %}
     <div class="right menu">
     {% if user.is_authenticated %}

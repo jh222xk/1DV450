@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse_lazy
 from django.db import models
 
 
@@ -33,3 +34,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse_lazy('api-v1:tag-detail', kwargs={'pk': self.id})

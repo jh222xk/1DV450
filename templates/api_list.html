@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 class="ui large header">Available API's</h2>
+
+  <div class="ui celled very relaxed list">
+    <div class="item">
+      <div class="content">
+        <h3 class="ui medium header"><a href="{% url 'api-v1:api-root' %}">Version 1</a></h3>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

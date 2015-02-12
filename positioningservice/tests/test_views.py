@@ -72,7 +72,7 @@ class PositionTest(UserAPITestCase):
         requires user to be logged in
         """
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:positions_list'))
+        response = self.client.get(reverse('api-v1:position-list'))
 
         # Check that our response is "Unauthorized"
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
@@ -87,7 +87,7 @@ class PositionTest(UserAPITestCase):
         requires user to be logged in
         """
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:positions_list'), {}, HTTP_AUTHORIZATION='Token')
+        response = self.client.get(reverse('api-v1:position-list'), {}, HTTP_AUTHORIZATION='Token')
 
         # Check that our response is "Unauthorized"
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
@@ -102,7 +102,7 @@ class PositionTest(UserAPITestCase):
         requires user to be logged in
         """
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:positions_list'), {}, HTTP_AUTHORIZATION='Token 123a39394')
+        response = self.client.get(reverse('api-v1:position-list'), {}, HTTP_AUTHORIZATION='Token 123a39394')
 
         # Check that our response is "Unauthorized"
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
@@ -119,7 +119,7 @@ class PositionTest(UserAPITestCase):
         """
 
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:positions_list'), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
+        response = self.client.get(reverse('api-v1:position-list'), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -128,17 +128,17 @@ class PositionTest(UserAPITestCase):
         response_data = loads(response.content.decode('utf-8'))
 
         # Check that our data is what it should be
-        self.assertEqual(response_data[0]['name'], "Kalmar")
-        self.assertEqual(response_data[0]['address'], "Kalmar, Sweden")
-        self.assertEqual(response_data[0]['longitude'], '56.000')
-        self.assertEqual(response_data[0]['latitude'], '19.000')
-        self.assertEqual(response_data[1]['name'], "Stockholm")
-        self.assertEqual(response_data[1]['address'], "Stockholm, Sweden")
-        self.assertEqual(response_data[1]['longitude'], '12.344')
-        self.assertEqual(response_data[1]['latitude'], '39.919')
+        self.assertEqual(response_data['results'][0]['name'], "Kalmar")
+        self.assertEqual(response_data['results'][0]['address'], "Kalmar, Sweden")
+        self.assertEqual(response_data['results'][0]['longitude'], '56.000')
+        self.assertEqual(response_data['results'][0]['latitude'], '19.000')
+        self.assertEqual(response_data['results'][1]['name'], "Stockholm")
+        self.assertEqual(response_data['results'][1]['address'], "Stockholm, Sweden")
+        self.assertEqual(response_data['results'][1]['longitude'], '12.344')
+        self.assertEqual(response_data['results'][1]['latitude'], '39.919')
 
         # Check events
-        self.assertEqual(response_data[0]['events'][0]['name'], "Guldveckan Kalmar")
+        self.assertEqual(response_data['results'][0]['events'][0]['name'], "Guldveckan Kalmar")
 
 
     def test_can_retrieve_a_single_position(self):
@@ -148,7 +148,7 @@ class PositionTest(UserAPITestCase):
         """
 
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:positions_detail', kwargs={'pk': 1}), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
+        response = self.client.get(reverse('api-v1:position-detail', kwargs={'pk': 1}), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -163,7 +163,7 @@ class PositionTest(UserAPITestCase):
         self.assertEqual(response_data['latitude'], '19.000')
 
         # Send a new request to the positions API to get pk id 2
-        response = self.client.get(reverse('positioningservice:positions_detail', kwargs={'pk': 2}), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
+        response = self.client.get(reverse('api-v1:position-detail', kwargs={'pk': 2}), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -189,7 +189,7 @@ class EventTest(UserAPITestCase):
     def test_can_retrieve_events(self):
 
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:events_list'), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
+        response = self.client.get(reverse('api-v1:event-list'), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -198,7 +198,7 @@ class EventTest(UserAPITestCase):
         response_data = loads(response.content.decode('utf-8'))
 
         # Check that our data is what it should be
-        self.assertEqual(response_data[0]['name'], "Guldveckan Kalmar")
+        self.assertEqual(response_data['results'][0]['name'], "Guldveckan Kalmar")
 
 
 class TagTest(UserAPITestCase):

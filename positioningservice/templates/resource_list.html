@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 class="ui large header">Available resources for the API version 1</h2>
+
+  {{object_list}}
+
+  <div class="ui celled very relaxed list">
+    <div class="item">
+      <div class="content">
+        <h3 class="ui medium header"><a href="{% url 'positioningservice:resource_list' %}">Version 1</a></h3>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

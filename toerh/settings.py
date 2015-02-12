@@ -41,7 +41,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_THROTTLE_RATES': {
         'user': '1000/day'
-    }
+    },
+    'PAGINATE_BY': 10
 }
 
 # Use nose to run all tests
