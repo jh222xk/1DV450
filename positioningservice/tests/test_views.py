@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from rest_framework.test import APITestCase
 from rest_framework import status
-from oauth2_provider.models import Application
+from rest_framework.authtoken.models import Token
 
 from ..models import Position, Event
 
@@ -25,12 +25,8 @@ class UserAPITestCase(APITestCase):
         self.user_obj = User.objects.create_user(
             self.user1['username'], "asd@asd.se", self.user1['password'])
 
-        self.client_obj = Application.objects.create(
-            user=self.user_obj,
-            name='clientname',
-            redirect_uris='http://app.com/ http://app.com/?callback',
-            client_type=Application.CLIENT_PUBLIC,
-            authorization_grant_type=Application.GRANT_PASSWORD
+        self.token = Token.objects.create(
+            user=self.user_obj
         )
 
         self.position = Position.objects.create(
@@ -61,36 +57,8 @@ class UserAPITestCase(APITestCase):
 
     def tearDown(self):
         self.user_obj.delete()
-        self.client_obj.delete()
+        self.token.delete()
         self.position.delete()
-
-    def get_token(self, user, client):
-        """
-        Method for getting oauth token
-        """
-        data = {
-            'grant_type': 'password', 'username': user['username'],
-            'password': user['password'], 'client_id': client.client_id,
-            'client_secret': client.client_secret,
-        }
-
-        # Post our data to the oauth access point
-        response = self.client.post(reverse('oauth2_provider:token'), data)
-
-        # Check that our response is fine
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        # Parse the content
-        response_data = loads(response.content.decode("utf-8"))
-
-        # Check if access_token is in our response_data
-        self.assertTrue('access_token' in response_data)
-
-        # Get the token
-        token = response_data['access_token']
-
-        # Send it!
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
 
 
 class PositionTest(UserAPITestCase):
@@ -107,22 +75,51 @@ class PositionTest(UserAPITestCase):
         response = self.client.get(reverse('positioningservice:positions_list'))
 
         # Check that our response is "Unauthorized"
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
         # Check for error message
         self.assertEqual(
             response.data['detail'], "Authentication credentials were not provided.")
+
+    def test_get_positions_requires_not_only_token_header(self):
+        """
+        Test method for checking that to get positions
+        requires user to be logged in
+        """
+        # Send request to the positions API
+        response = self.client.get(reverse('positioningservice:positions_list'), {}, HTTP_AUTHORIZATION='Token')
+
+        # Check that our response is "Unauthorized"
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        # Check for error message
+        self.assertEqual(
+            response.data['detail'], "Invalid token header. No credentials provided.")
+
+    def test_get_positions_requires_a_valid_account(self):
+        """
+        Test method for checking that to get positions
+        requires user to be logged in
+        """
+        # Send request to the positions API
+        response = self.client.get(reverse('positioningservice:positions_list'), {}, HTTP_AUTHORIZATION='Token 123a39394')
+
+        # Check that our response is "Unauthorized"
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        # Check for error message
+        self.assertEqual(
+            response.data['detail'], "Invalid token")
+
 
     def test_can_retrieve_positions(self):
         """
         Test method for checking that authorized users can
         get a list of positions
         """
-        # Get our access_token
-        self.get_token(self.user1, self.client_obj)
 
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:positions_list'))
+        response = self.client.get(reverse('positioningservice:positions_list'), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -149,11 +146,9 @@ class PositionTest(UserAPITestCase):
         Test for checking that authorized users can
         get a SINGLE position
         """
-        # Get our access_token
-        self.get_token(self.user1, self.client_obj)
 
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:positions_detail', kwargs={'pk': 1}))
+        response = self.client.get(reverse('positioningservice:positions_detail', kwargs={'pk': 1}), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -168,7 +163,7 @@ class PositionTest(UserAPITestCase):
         self.assertEqual(response_data['latitude'], '19.000')
 
         # Send a new request to the positions API to get pk id 2
-        response = self.client.get(reverse('positioningservice:positions_detail', kwargs={'pk': 2}))
+        response = self.client.get(reverse('positioningservice:positions_detail', kwargs={'pk': 2}), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -193,11 +188,8 @@ class EventTest(UserAPITestCase):
 
     def test_can_retrieve_events(self):
 
-        # Get our access_token
-        self.get_token(self.user1, self.client_obj)
-
         # Send request to the positions API
-        response = self.client.get(reverse('positioningservice:events_list'))
+        response = self.client.get(reverse('positioningservice:events_list'), {}, HTTP_AUTHORIZATION='Token %s' % self.token)
 
         # Check that our response is fine
         self.assertEqual(response.status_code, status.HTTP_200_OK)
