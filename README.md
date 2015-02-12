@@ -33,6 +33,15 @@ To get the database up and running with the latest migrations and so on just typ
 and then the database should be just fine.
 
 ## Run it
+
+Before you run it you need to set `TOERH_DJANGO_SECRET_KEY`
+
+You can set it like this in unix-systems:
+
+`export TOERH_DJANGO_SECRET_KEY='@v9c-4ymi$o6xk@m24c5hy5)7vrme6_qk_pbd*7+p(!trld@o%'`
+
+(You can use that key since it's used for Travis).
+
 locate to `path/to/toerh/` then just run Python's built-in server using the command: `python manage.py runserver` and the application will be served at `http://localhost:8000/`
 
 # Using the API
