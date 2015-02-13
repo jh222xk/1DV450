@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DeleteView, View
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from rest_framework.authtoken.models import Token
 
@@ -11,8 +13,16 @@ class TokenListView(ListView):
     model = Token
     context_object_name = 'tokens'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TokenListView, self).dispatch(*args, **kwargs)
+
 
 class TokenCreate(View):
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TokenCreate, self).dispatch(*args, **kwargs)
 
     def post(self, request):
         """
@@ -41,6 +51,10 @@ class TokenCreate(View):
 class TokenDelete(DeleteView):
     model = Token
     success_url = reverse_lazy('tokens:list')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TokenDelete, self).dispatch(*args, **kwargs)
 
     # Since SuccessMessageMixin does not work for
     # DeleteView we have to define it ourselves.
