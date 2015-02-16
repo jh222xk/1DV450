@@ -19,15 +19,15 @@ urlpatterns = patterns('',
 
     # Accounts
     url(r'^register/$', SignUpFormView.as_view(), name='register'),
-    url(r'^accounts/profile/$', RedirectView.as_view(pattern_name='tokens:list')),
-    url(r'^accounts/login/$', RedirectView.as_view(pattern_name='login')),
 
+    # Tokens
     url(r'^tokens/', include('tokens.urls', namespace='tokens')),
 
     # API authentication
     url(r'^$', 'django.contrib.auth.views.login', template_name, name='login'),
     url(r'', include('rest_framework.urls',\
         namespace='rest_framework')),
+
 
     # Available API versions
     url(r'^api/$', TemplateView.as_view(template_name="api_list.html"), name='api-list'),

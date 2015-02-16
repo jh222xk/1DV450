@@ -16,6 +16,9 @@ DEBUG = TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['localhost']
 
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/tokens/'
+
 # Oauth2 settings
 OAUTH2_PROVIDER = {
     # this is the list of available scopes
