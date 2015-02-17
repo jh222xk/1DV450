@@ -1,5 +1,5 @@
-from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import redirect
 from django.views.generic import ListView, DeleteView, View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -43,13 +43,13 @@ class TokenCreate(View):
         if token:
             messages.error(
                 request, 'You cant create more than one token! Delete your token first.')
-            return HttpResponseRedirect(reverse_lazy('tokens:list'))
+            return redirect(reverse_lazy('tokens:list'))
 
         Token.objects.create(user=request.user)
 
         messages.success(request, 'Your token has been created!')
 
-        return HttpResponseRedirect(reverse_lazy('tokens:list'))
+        return redirect(reverse_lazy('tokens:list'))
 
 
 class TokenDelete(DeleteView):
@@ -58,8 +58,9 @@ class TokenDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(TokenDelete, self).dispatch(*args,*kwargs)
+        return super(TokenDelete, self).dispatch(*args, **kwargs)
 
+    # Since SuccessMessageMixin does not work for
     # DeleteView we have to define it ourselves.
     # Ticket: https://code.djangoproject.com/ticket/21926
     def delete(self, request, *args, **kwargs):
@@ -71,4 +72,4 @@ class TokenDelete(DeleteView):
         success_url = self.get_success_url()
         self.object.delete()
         messages.success(request, 'Your token has successfully been deleted!')
-        return HttpResponseRedirect(success_url)
+        return redirect(success_url)
