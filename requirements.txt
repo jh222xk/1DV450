@@ -3,8 +3,8 @@ django>=1.7
 
 # API
 djangorestframework
-#django-oauth2-provider
-django-oauth-toolkit
+#django-oauth-toolkit
+djangorestframework-jwt
 
 # Testing
 factory_boy

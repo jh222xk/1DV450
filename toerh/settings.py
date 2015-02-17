@@ -29,7 +29,7 @@ OAUTH2_PROVIDER = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':
         ('rest_framework.authentication.SessionAuthentication',
-            'rest_framework.authentication.TokenAuthentication',),
+            'rest_framework_jwt.authentication.JSONWebTokenAuthentication',),
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.ModelSerializer',
     'DEFAULT_PERMISSION_CLASSES':
@@ -54,7 +54,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # Tell nose to measure coverage on the 'foo' and 'bar' apps
 NOSE_ARGS = [
     '--with-coverage',
-    '--cover-package=positioningservice,accounts,toerh',
+    '--cover-package=positioningservice,accounts,tokens, toerh',
     '--cover-html'
 ]
 
