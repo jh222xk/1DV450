@@ -1,7 +1,6 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse_lazy, reverse
-from django.views.generic import ListView, CreateView, DeleteView, View
-from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import ListView, DeleteView, View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -16,6 +15,11 @@ class TokenListView(ListView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(TokenListView, self).dispatch(*args, **kwargs)
+
+    def get_queryset(self):
+        # Make sure the user owns the object
+        queryset = Token.objects.filter(user=self.request.user)
+        return queryset
 
 
 class TokenCreate(View):
@@ -54,9 +58,8 @@ class TokenDelete(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(TokenDelete, self).dispatch(*args, **kwargs)
+        return super(TokenDelete, self).dispatch(*args,*kwargs)
 
-    # Since SuccessMessageMixin does not work for
     # DeleteView we have to define it ourselves.
     # Ticket: https://code.djangoproject.com/ticket/21926
     def delete(self, request, *args, **kwargs):

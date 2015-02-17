@@ -1,10 +1,9 @@
 from django.views.generic import FormView
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect, render
-from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse_lazy
 
 from .forms import SignUpForm
 
@@ -46,4 +45,4 @@ class SignUpFormView(FormView):
         messages.success(self.request, 'Congratulations! You are now registered and logged in!')
 
         # Redirect user to the users app list
-        return redirect(reverse('tokens:list'))
+        return redirect(reverse_lazy('tokens:list'))

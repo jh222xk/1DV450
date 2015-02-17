@@ -18,7 +18,7 @@
 
       <form method="post" action="{% url 'tokens:new' %}">
         {% csrf_token %}
-        <button type="submit" class="ui button green">New token</button>
+        <button type="submit" name="new_token" class="ui button green">New token</button>
       </form>
     {% endfor %}
   </div>

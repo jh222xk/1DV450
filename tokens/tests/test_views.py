@@ -86,3 +86,22 @@ class TokenTest(TestCase):
         # Check that we cannot access that url (redirection to the login url)
         self.assertRedirects(response, "%s?next=%s" % (reverse('login'), reverse(
             'tokens:delete', kwargs={'pk': 1})), status_code=302, target_status_code=200)
+
+
+
+    def test_can_only_create_one_new_token(self):
+        """
+        Test method for checking that we only
+        can create one token
+        """
+
+        response = self.client.post(reverse('tokens:new'))
+
+        self.assertRedirects(response, "%s?next=%s" % (reverse('login'), reverse(
+            'tokens:new')), status_code=302, target_status_code=200)
+
+        # Grab our count
+        count = Token.objects.count()
+
+        # Make sure our count is the same
+        self.assertEqual(count, 1)
