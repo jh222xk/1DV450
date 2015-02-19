@@ -14,7 +14,7 @@ branches:
   only:
     - master
 script:
-  - phantomjs testrunner.js
+  - phantomjs --version
   - python manage.py test positioningservice
 matrix:
   fast_finish: true
