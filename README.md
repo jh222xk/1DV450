@@ -4,6 +4,8 @@ Webbramverk - 1DV450
 
 [![Build Status](https://travis-ci.org/jh222xk/toerh.svg?branch=master)](https://travis-ci.org/jh222xk/toerh)
 
+[![Coverage Status](https://coveralls.io/repos/jh222xk/toerh/badge.svg)](https://coveralls.io/r/jh222xk/toerh)
+
 # Run the application
 
 ## Live

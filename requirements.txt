@@ -11,3 +11,4 @@ factory_boy
 coverage
 selenium
 django-nose
+coveralls

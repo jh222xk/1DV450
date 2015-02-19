@@ -14,8 +14,10 @@ branches:
   only:
     - master
 script:
-  - phantomjs --version
   - python manage.py test
+  - coverage run
+after_success:
+  - coveralls
 matrix:
   fast_finish: true
 notifications:
