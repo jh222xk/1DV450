@@ -1,0 +1,38 @@
+[
+{
+  "pk": 1,
+  "fields": {
+    "last_login": "2015-01-27T13:57:59Z",
+    "password": "pbkdf2_sha256$15000$9sA5snsnFWM5$1ZK3cYdzeB+cshMiWauTBvtFjc4F1zTmkFX6j3pI2Bg=",
+    "last_name": "",
+    "is_active": true,
+    "email": "",
+    "first_name": "",
+    "username": "admin",
+    "groups": [],
+    "user_permissions": [],
+    "is_staff": true,
+    "is_superuser": true,
+    "date_joined": "2015-01-27T13:57:59Z"
+  },
+  "model": "auth.user"
+},
+{
+  "pk": 2,
+  "fields": {
+    "last_login": "2015-01-27T13:57:59Z",
+    "password": "pbkdf2_sha256$15000$CcwSGjCBAfux$yBJ9wACkwAL8zPE+dAn7Q4pjxrkVPyKXS7w3zZ/9hao=",
+    "last_name": "",
+    "is_active": true,
+    "email": "edith@edith.com",
+    "first_name": "",
+    "username": "edith",
+    "groups": [],
+    "user_permissions": [],
+    "is_staff": true,
+    "is_superuser": true,
+    "date_joined": "2015-01-27T13:57:59Z"
+  },
+  "model": "auth.user"
+}
+]
