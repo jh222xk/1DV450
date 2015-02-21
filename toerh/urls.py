@@ -24,7 +24,7 @@ urlpatterns = patterns('',
                        url(r'^tokens/', include('tokens.urls', namespace='tokens')),
 
                        # API authentication
-                       url(r'^$', 'accounts.views.login', template_name, name='login'),
+                       url(r'^$', 'django.contrib.auth.views.login', template_name, name='login'),
                        url(r'', include('rest_framework.urls', namespace='rest_framework')),
                        url(r'^api-token-auth/', 'rest_framework_jwt.views.obtain_jwt_token', name='token-auth'),
 
