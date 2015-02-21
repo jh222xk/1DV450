@@ -8,8 +8,6 @@ class TestCaseUtils(object):
         # Edith goes to the login page
         self.browser.get(self.server_url + reverse('login'))
 
-        body = self.browser.find_element_by_tag_name('body')
-
         # She fills in the inputs
         username_field = self.browser.find_element_by_name('username')
         username_field.send_keys('edith')

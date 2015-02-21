@@ -5,7 +5,6 @@ from ..models import Position, Event, Tag
 
 
 class PositionModelTest(TestCase):
-
     def test_string_representation(self):
         position = Position.objects.create(
             name="Kalmar",
@@ -18,7 +17,6 @@ class PositionModelTest(TestCase):
 
 
 class EventModelTest(TestCase):
-
     def setUp(self):
         self.position = Position.objects.create(
             name="Kalmar",
@@ -43,7 +41,6 @@ class EventModelTest(TestCase):
 
 
 class TagModelTest(TestCase):
-
     def test_string_representation(self):
         tag = Tag.objects.create(
             name='#guldveckan'

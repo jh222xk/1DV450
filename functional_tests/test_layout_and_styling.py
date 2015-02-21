@@ -12,9 +12,9 @@ class LayoutAndStylingTest(FunctionalTest):
         self.browser.get(self.server_url + reverse('login'))
 
         # She notices the input box is nicely centered
-        inputbox = self.browser.find_element_by_id('id_username')
+        input_box = self.browser.find_element_by_id('id_username')
         self.assertAlmostEqual(
-            inputbox.location['x'] + inputbox.size['width'] / 2,
+            input_box.location['x'] + input_box.size['width'] / 2,
             200,
             delta=5
         )

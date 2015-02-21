@@ -16,16 +16,12 @@ class LoginUserTest(FunctionalTest):
         # Edith goes to the login page
         self.browser.get(self.server_url + reverse('login'))
 
-        body = self.browser.find_element_by_tag_name('body')
-
         # She fills in the inputs
         username_field = self.browser.find_element_by_name('username')
         username_field.send_keys('edith')
         password_field = self.browser.find_element_by_name('password')
         password_field.send_keys('password')
         password_field.send_keys(Keys.RETURN)
-
-        body = self.browser.find_element_by_tag_name('body')
 
         # After successfully logged in she goes to her applications
         self.browser.get(self.server_url + reverse('tokens:list'))
@@ -41,8 +37,6 @@ class LoginUserTest(FunctionalTest):
 
         # Edith goes to the login page
         self.browser.get(self.server_url + reverse('login'))
-
-        body = self.browser.find_element_by_tag_name('body')
 
         # She fills in her beautiful name
         username_field = self.browser.find_element_by_name('username')

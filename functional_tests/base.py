@@ -6,8 +6,8 @@ from selenium import webdriver
 
 from .test_utils import TestCaseUtils
 
-class FunctionalTest(TestCaseUtils, LiveServerTestCase):
 
+class FunctionalTest(TestCaseUtils, LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         for arg in sys.argv:
