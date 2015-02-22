@@ -1,6 +1,8 @@
 # Django version
 django>=1.7
 
+elasticsearch-dsl
+
 # API
 djangorestframework
 #django-oauth-toolkit
@@ -12,3 +14,4 @@ coverage
 selenium
 django-nose
 coveralls
+fake-factory

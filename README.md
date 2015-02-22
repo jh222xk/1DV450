@@ -34,6 +34,26 @@ To get the database up and running with the latest migrations and so on just typ
 
 and then the database should be just fine.
 
+### Factories
+To seed the database with some nice data run: `python manage.py shell`
+then type: `from positioningservice.tests.factories import *` so all our factories get imported.
+
+#### Positions
+After import type: `PositionFactory()` and a position will be created.
+
+#### Events
+After import type: `EventFactory()` and a event will be created. If we want to have some tags related to that
+event we need to do this instead:
+
+```
+tag1 = TagFactory()
+tag2 = TagFactory()
+EventFactory.create(tags=(tag1, tag2))
+```
+
+#### Tags
+After import type: `TagFactory()` and a tag will be created.
+
 ## Run it
 
 Before you run it you need to set `TOERH_DJANGO_SECRET_KEY`
