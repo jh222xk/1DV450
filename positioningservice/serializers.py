@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField
 
-from .models import Position, Event, Tag
+from .models import Position, Event, Tag, Coffee, Review
 
 
 class TagSerializer(ModelSerializer):
@@ -43,3 +43,19 @@ class PositionSerializer(ModelSerializer):
     class Meta:
         model = Position
         fields = ('name', 'address', 'longitude', 'latitude', 'url', 'events')
+
+
+class ReviewSerializer(ModelSerializer):
+
+    class Meta:
+        model = Review
+        fields = ('rating', 'description')
+
+
+class CoffeeSerializer(ModelSerializer):
+    position = PositionSerializer(many=False, read_only=True)
+    reviews = ReviewSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Coffee
+        fields = ('name', 'position', 'reviews', 'rating')

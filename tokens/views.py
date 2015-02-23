@@ -60,6 +60,11 @@ class TokenDelete(DeleteView):
     def dispatch(self, *args, **kwargs):
         return super(TokenDelete, self).dispatch(*args, **kwargs)
 
+    def get_queryset(self):
+        # Make sure the user owns the object
+        queryset = Token.objects.filter(user=self.request.user)
+        return queryset
+
     # Since SuccessMessageMixin does not work for
     # DeleteView we have to define it ourselves.
     # Ticket: https://code.djangoproject.com/ticket/21926

@@ -1,16 +1,17 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic import RedirectView, TemplateView
+from django.views.generic import TemplateView
+from rest_framework import routers
 
 from accounts.views import SignUpFormView
-from positioningservice.views import PositionViewSet, EventViewSet, TagViewSet
+from positioningservice.views import PositionViewSet, EventViewSet, TagViewSet, PositionSearchViewSet
 
-from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'positions', PositionViewSet)
 router.register(r'events', EventViewSet)
 router.register(r'tags', TagViewSet)
+router.register(r'search', PositionSearchViewSet, base_name='search')
 
 template_name = {'template_name': 'rest_framework/login.html'}
 
