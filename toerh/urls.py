@@ -4,14 +4,16 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 
 from accounts.views import SignUpFormView
-from positioningservice.views import PositionViewSet, EventViewSet, TagViewSet, PositionSearchViewSet
+from positioningservice.views import PositionViewSet, TagViewSet, PositionSearchViewSet, UserViewSet, \
+    ReviewViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'positions', PositionViewSet)
-router.register(r'events', EventViewSet)
 router.register(r'tags', TagViewSet)
-router.register(r'search', PositionSearchViewSet, base_name='search')
+router.register(r'users', UserViewSet)
+router.register(r'reviews', ReviewViewSet)
+router.register(r'coffeehouses', PositionSearchViewSet, base_name='coffeehouses')
 
 template_name = {'template_name': 'rest_framework/login.html'}
 

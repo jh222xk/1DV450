@@ -19,12 +19,6 @@ ALLOWED_HOSTS = ['localhost']
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/tokens/'
 
-# Oauth2 settings
-OAUTH2_PROVIDER = {
-    # this is the list of available scopes
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
-}
-
 # Rest framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':
@@ -39,13 +33,16 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.XMLRenderer',
     ),
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
     'DEFAULT_THROTTLE_CLASSES': (
         'rest_framework.throttling.UserRateThrottle',
     ),
     'DEFAULT_THROTTLE_RATES': {
         'user': '1000/day'
     },
-    'PAGINATE_BY': 10
+    'PAGINATE_BY': 10,
+    'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
+    'MAX_PAGINATE_BY': 100             # Maximum limit allowed when using `?page_size=xxx`
 }
 
 # Use nose to run all tests
@@ -66,12 +63,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
 
     # Third party apps
     'rest_framework',
-    # 'oauth2_provider',
     'django_nose',
-    'rest_framework.authtoken',
+    'debug_toolbar',
 
     # Own apps
     'positioningservice',
@@ -94,14 +91,17 @@ ROOT_URLCONF = 'toerh.urls'
 
 WSGI_APPLICATION = 'toerh.wsgi.application'
 
-# Database
+# Databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql', # postgresql_psycopg2
+        'NAME': 'toerh',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
-
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, '../templates'),
 )

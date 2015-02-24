@@ -3,7 +3,7 @@ from .models import Position, Event, Tag, Coffee, Review
 
 
 class PositionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'address', 'latitude', 'longitude')
+    list_display = ('address', 'latitude', 'longitude')
 
 
 class CoffeeAdmin(admin.ModelAdmin):

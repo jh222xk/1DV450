@@ -1,11 +1,11 @@
 # Django version
 django>=1.7
 
+# Elasticsearch
 pyelasticsearch
 
 # API
 djangorestframework
-#django-oauth-toolkit
 djangorestframework-jwt
 
 # Testing
