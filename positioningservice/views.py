@@ -10,12 +10,15 @@ from .models import Position, Tag, Coffee, Review
 from .authentications import SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication, IsOwner
 
 from .serializers import PositionSerializer, TagSerializer, CoffeeSerializer, UserSerializer, \
-    ReviewSerializer, NestedReviewSerializer
+    ReviewSerializer, NestedReviewSerializer, ReviewCoffee
 
 
-class PositionSearchViewSet(ModelViewSet):
+class CoffeeViewSet(ModelViewSet):
     serializer_class = CoffeeSerializer
     authentication_classes = (SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication)
+    filter_backends = (OrderingFilter,)
+    ordering_fields = ('name', 'address', 'created_at')
+
 
     def search(self, question, longitude, latitude):
         index = 'toerh_coffee'
@@ -26,27 +29,24 @@ class PositionSearchViewSet(ModelViewSet):
             pass
 
         mapping = {
-            "item": {
+            "place": {
                 "properties": {
                     "location": {
                         "type": "geo_point",
-                        "lat_lon": True
+                        #"lat_lon": True
                     },
                 }
             }
         }
 
         es.create_index(index)
-        es.put_mapping(index, "item", mapping)
+        es.put_mapping(index, "place", mapping)
         for c in Coffee.objects.all():
             es.bulk([
                     es.index_op({
                         'pk': c.pk,
                         'name': c.name,
                         'rating': c.rating,
-                        #'review': {
-                        #    'description': [r.description for r in c.reviews.all()]
-                        #},
                         'location': {
                             'lon': c.position.longitude,
                             'lat': c.position.latitude
@@ -81,7 +81,7 @@ class PositionSearchViewSet(ModelViewSet):
 
         if longitude and longitude is not None:
             query['query']['function_score']['functions'] = [
-                {'exp': {'rating': {'origin': 5, 'scale': 1, 'offset': 0.1}}},
+                #{'exp': {'rating': {'origin': 5, 'scale': 1, 'offset': 0.1}}},
                 #{'gauss': {'location': {'origin': 'location', 'scale': '250m', 'offset': '50m'}}},
                 {'gauss': {
                         "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "50m",
@@ -103,35 +103,42 @@ class PositionSearchViewSet(ModelViewSet):
         return results
 
     def get_queryset(self):
-
         try:
-            latitude = float(self.request.query_params.get('latitude'))
-            longitude = float(self.request.query_params.get('longitude'))
-        except TypeError:
-            longitude = None
-            latitude = None
+            pk = self.kwargs['pk']
+        except KeyError:
+            pk = None
+        if pk is None:
+            try:
+                latitude = float(self.request.query_params.get('latitude'))
+                longitude = float(self.request.query_params.get('longitude'))
+            except TypeError:
+                longitude = None
+                latitude = None
 
-        query = self.request.query_params.get('query', "")
+            query = self.request.query_params.get('query', "")
 
-        # use LONGITUDE, LATITUDE
-        results = self.search(question=query, longitude=longitude, latitude=latitude)
+            # use LONGITUDE, LATITUDE
+            results = self.search(question=query, longitude=longitude, latitude=latitude)
 
-        hits = results['hits']['hits']
+            hits = results['hits']['hits']
 
-        # print(hits)
+            # print(hits)
 
-        # for x in hits:
-        # print(x['_source'])
+            # for x in hits:
+            # print(x['_source'])
 
-        # {'_score': 0.79549515, '_type': 'place', '_id': '3eVjFTuQQ3yxtSiOXjB7MQ', '_index': 'toerh_coffee',
-        # '_source': {'name': 'Espresso House', 'location': {'lat': 16.326955, 'lon': 56.6874601}}}
+            # {'_score': 0.79549515, '_type': 'place', '_id': '3eVjFTuQQ3yxtSiOXjB7MQ', '_index': 'toerh_coffee',
+            # '_source': {'name': 'Espresso House', 'location': {'lat': 16.326955, 'lon': 56.6874601}}}
 
-        queryset = list(Coffee.objects.filter(id__in=[r['_source']['pk'] for r in hits]))
+            queryset = list(Coffee.objects.filter(id__in=[r['_source']['pk'] for r in hits]))
 
-        # SORT IT
-        queryset.sort(key=lambda t: [int(r['_source']['pk']) for r in hits].index(t.pk))
+            # SORT IT
+            queryset.sort(key=lambda t: [int(r['_source']['pk']) for r in hits].index(t.pk))
 
-        return queryset
+            return queryset
+        else:
+            coffee = Coffee.objects.filter(pk=pk)
+            return coffee
 
 
 class PositionViewSet(ReadOnlyModelViewSet):
@@ -142,7 +149,7 @@ class PositionViewSet(ReadOnlyModelViewSet):
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
     filter_backends = (OrderingFilter,)
-    ordering_fields = ('name', 'address', 'created_at')
+    ordering_fields = ('name', 'address', 'created_at',)
 
 
 class TagViewSet(ModelViewSet):
@@ -152,11 +159,20 @@ class TagViewSet(ModelViewSet):
     filter_backends = (OrderingFilter,)
     ordering_fields = ('name', 'created_at')
 
+    @detail_route()
+    def coffeehouses(self, request, pk):
+        queryset = Coffee.objects.filter(tags__pk=pk)
+
+        serializer = CoffeeSerializer(queryset, many=True, context={'request': request})
+        return Response(serializer.data)
+
 
 class UserViewSet(ModelViewSet):
     authentication_classes = (SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_backends = (OrderingFilter,)
+    ordering_fields = ('username', 'email', 'date_joined', 'last_login', 'is_active')
 
     @detail_route()
     def reviews(self, request, pk):
@@ -174,6 +190,8 @@ class ReviewViewSet(ModelViewSet):
     permission_classes = (IsOwner,)
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    filter_backends = (OrderingFilter,)
+    ordering_fields = ('rating', 'description', 'coffee', )
 
 
     def perform_create(self, serializer):

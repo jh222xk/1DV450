@@ -1,16 +1,15 @@
 from django.contrib.auth.models import User
-from rest_framework import serializers
-from rest_framework.fields import CurrentUserDefault
-from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField, HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField
 
 from .models import Position, Event, Tag, Coffee, Review
 
 
 class UserSerializer(ModelSerializer):
+    url = HyperlinkedIdentityField(view_name='api-v1:user-detail')
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'date_joined', 'last_login', 'is_active')
+        fields = ('username', 'email', 'date_joined', 'last_login', 'is_active', 'url',)
 
 
 class TagSerializer(ModelSerializer):
@@ -47,13 +46,13 @@ class PositionSerializer(ModelSerializer):
     Serializing all the Positions
     """
 
-    events = EventSerializer(many=True, read_only=True)
+    #events = EventSerializer(many=True, read_only=True)
     url = HyperlinkedIdentityField(
         view_name='api-v1:position-detail')
 
     class Meta:
         model = Position
-        fields = ('address', 'longitude', 'latitude', 'url', 'created_at', 'events')
+        fields = ('address', 'longitude', 'latitude', 'url', 'created_at',)
 
 
 class ReviewSerializer(ModelSerializer):
@@ -77,16 +76,32 @@ class ReviewSerializer(ModelSerializer):
         return self.context['request'].user
 
 
+class ReviewCoffee(ModelSerializer):
+    user = UserSerializer(many=False)
+    class Meta:
+        model = Review
+        fields = ('rating', 'description', 'created_at', 'user',)
 
 
 class CoffeeSerializer(ModelSerializer):
     position = PositionSerializer(many=False, read_only=True)
-    reviews = ReviewSerializer(many=True, read_only=True)
+    reviews = ReviewCoffee(many=True, read_only=True, source='review')
+    url = HyperlinkedIdentityField(view_name='api-v1:coffeehouses-detail')
+    tags = TagSerializer(many=True)
+
+    class Meta:
+        model = Coffee
+        fields = ('name', 'rating', 'url', 'position', 'tags', 'reviews',)
+
+
+class SimpleCoffeeSerializer(ModelSerializer):
+    position = PositionSerializer(many=False, read_only=True)
+    reviews = ReviewCoffee(many=True, read_only=True, source='review')
     url = HyperlinkedIdentityField(view_name='api-v1:coffeehouses-detail')
 
     class Meta:
         model = Coffee
-        fields = ('name', 'reviews', 'rating', 'url', 'position',)
+        fields = ('name', 'rating', 'url', 'position', 'reviews',)
 
 
 class NestedReviewSerializer(ModelSerializer):

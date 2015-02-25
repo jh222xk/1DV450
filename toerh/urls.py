@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 
 from accounts.views import SignUpFormView
-from positioningservice.views import PositionViewSet, TagViewSet, PositionSearchViewSet, UserViewSet, \
+from positioningservice.views import PositionViewSet, TagViewSet, CoffeeViewSet, UserViewSet, \
     ReviewViewSet
 
 
@@ -13,7 +13,7 @@ router.register(r'positions', PositionViewSet)
 router.register(r'tags', TagViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'reviews', ReviewViewSet)
-router.register(r'coffeehouses', PositionSearchViewSet, base_name='coffeehouses')
+router.register(r'coffeehouses', CoffeeViewSet, base_name='coffeehouses')
 
 template_name = {'template_name': 'rest_framework/login.html'}
 
