@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from rest_framework.authtoken.models import Token
+from .models import Token
 
 
 class TokenListView(ListView):
@@ -19,6 +19,7 @@ class TokenListView(ListView):
     def get_queryset(self):
         # Make sure the user owns the object
         queryset = Token.objects.filter(user=self.request.user)
+
         return queryset
 
 
