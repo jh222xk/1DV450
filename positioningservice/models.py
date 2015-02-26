@@ -13,7 +13,7 @@ class Position(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "%s (%s, %s)" % (self.name, self.longitude, self.latitude)
+        return "%s [%s, %s]" % (self.address, self.longitude, self.latitude)
 
 
     @property
@@ -71,6 +71,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey('auth.User')
 
     def __str__(self):
         return self.name

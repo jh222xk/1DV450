@@ -1,19 +1,22 @@
 from django.contrib.auth.models import User
 
 from pyelasticsearch import ElasticSearch, ElasticHttpNotFoundError
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, ListModelMixin
+from rest_framework.mixins import UpdateModelMixin
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.filters import OrderingFilter
-from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
-from rest_framework.decorators import detail_route
+from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet, GenericViewSet
+from rest_framework.decorators import detail_route, list_route
 
 from .models import Position, Tag, Coffee, Review
-from .authentications import SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication, IsOwner
-
+from .authentications import SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication, IsOwner, IsLoggedInAs, \
+    SafeTokenUserCreationAuthentication
 from .serializers import PositionSerializer, TagSerializer, CoffeeSerializer, UserSerializer, \
-    ReviewSerializer, NestedReviewSerializer, ReviewCoffee
+    ReviewSerializer, NestedReviewSerializer
 
 
-class CoffeeViewSet(ModelViewSet):
+class CoffeeViewSet(ReadOnlyModelViewSet):
     serializer_class = CoffeeSerializer
     authentication_classes = (SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication)
     filter_backends = (OrderingFilter,)
@@ -33,7 +36,7 @@ class CoffeeViewSet(ModelViewSet):
                 "properties": {
                     "location": {
                         "type": "geo_point",
-                        #"lat_lon": True
+                        # "lat_lon": True
                     },
                 }
             }
@@ -43,15 +46,15 @@ class CoffeeViewSet(ModelViewSet):
         es.put_mapping(index, "place", mapping)
         for c in Coffee.objects.all():
             es.bulk([
-                    es.index_op({
-                        'pk': c.pk,
-                        'name': c.name,
-                        'rating': c.rating,
-                        'location': {
-                            'lon': c.position.longitude,
-                            'lat': c.position.latitude
-                        }
-                    }),
+                        es.index_op({
+                            'pk': c.pk,
+                            'name': c.name,
+                            'rating': c.rating,
+                            'location': {
+                                'lon': c.position.longitude,
+                                'lat': c.position.latitude
+                            }
+                        }),
                     ],
                     doc_type='place',
                     index=index)
@@ -81,18 +84,18 @@ class CoffeeViewSet(ModelViewSet):
 
         if longitude and longitude is not None:
             query['query']['function_score']['functions'] = [
-                #{'exp': {'rating': {'origin': 5, 'scale': 1, 'offset': 0.1}}},
-                #{'gauss': {'location': {'origin': 'location', 'scale': '250m', 'offset': '50m'}}},
+                # {'exp': {'rating': {'origin': 5, 'scale': 1, 'offset': 0.1}}},
+                # {'gauss': {'location': {'origin': 'location', 'scale': '250m', 'offset': '50m'}}},
                 {'gauss': {
-                        "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "50m",
-                                     "scale": "250m"}
-                        }},
+                    "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "50m",
+                                 "scale": "250m"}
+                }},
                 {'gauss': {
-                        "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "50m",
-                                     "scale": "500m"}
-                        },
+                    "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "50m",
+                                 "scale": "500m"}
                 },
-                ]
+                },
+            ]
 
         # print(query)
 
@@ -149,10 +152,11 @@ class PositionViewSet(ReadOnlyModelViewSet):
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
     filter_backends = (OrderingFilter,)
-    ordering_fields = ('name', 'address', 'created_at',)
+    ordering_fields = ('address', 'created_at',)
 
 
 class TagViewSet(ModelViewSet):
+    permission_classes = (IsAuthenticated, IsOwner)
     authentication_classes = (SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication)
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
@@ -166,9 +170,15 @@ class TagViewSet(ModelViewSet):
         serializer = CoffeeSerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data)
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
-class UserViewSet(ModelViewSet):
-    authentication_classes = (SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication)
+
+class UserViewSet(CreateModelMixin, UpdateModelMixin, ListModelMixin, RetrieveModelMixin, GenericViewSet):
+    authentication_classes = (
+        SafeTokenAuthentication, SafeTokenUserCreationAuthentication, UnsafeJSONWebTokenAuthentication
+    )
+    permission_classes = (IsLoggedInAs,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_backends = (OrderingFilter,)
@@ -181,6 +191,22 @@ class UserViewSet(ModelViewSet):
         serializer = NestedReviewSerializer(reviews, many=True, context={'request': request})
         return Response(serializer.data)
 
+    @list_route()
+    def active(self, request):
+        users = User.objects.filter(is_active=True)
+
+        serializer = UserSerializer(users, many=True, context={'request': request})
+
+        return Response(serializer.data)
+
+    @list_route()
+    def un_active(self, request):
+        users = User.objects.filter(is_active=False)
+
+        serializer = UserSerializer(users, many=True, context={'request': request})
+
+        return Response(serializer.data)
+
 
 class ReviewViewSet(ModelViewSet):
     """
@@ -191,7 +217,7 @@ class ReviewViewSet(ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     filter_backends = (OrderingFilter,)
-    ordering_fields = ('rating', 'description', 'coffee', )
+    ordering_fields = ('rating', 'description', 'coffee', 'created_at')
 
 
     def perform_create(self, serializer):

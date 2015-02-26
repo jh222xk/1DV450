@@ -29,7 +29,7 @@ urlpatterns = patterns('',
                        # API authentication
                        url(r'^$', 'django.contrib.auth.views.login', template_name, name='login'),
                        url(r'', include('rest_framework.urls', namespace='rest_framework')),
-                       url(r'^api-token-auth/', 'rest_framework_jwt.views.obtain_jwt_token', name='token-auth'),
+                       url(r'^api/v1/auth/', 'rest_framework_jwt.views.obtain_jwt_token', name='token-auth'),
 
                        # Available API versions
                        url(r'^api/$', TemplateView.as_view(template_name="api_list.html"), name='api-list'),
