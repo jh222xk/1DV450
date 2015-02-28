@@ -1,11 +1,11 @@
 # Django version
 django>=1.7
 
-elasticsearch-dsl
+# Elasticsearch
+pyelasticsearch
 
 # API
 djangorestframework
-#django-oauth-toolkit
 djangorestframework-jwt
 
 # Testing
@@ -15,3 +15,4 @@ selenium
 django-nose
 coveralls
 fake-factory
+django-debug-toolbar

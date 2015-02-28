@@ -1,19 +1,24 @@
 from django.contrib import admin
-from .models import Position, Event, Tag
+
+from .models import Position, Tag, Coffee, Review
 
 
+@admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'address', 'latitude', 'longitude')
+    list_display = ('address', 'latitude', 'longitude')
 
 
-class EventAdmin(admin.ModelAdmin):
-    list_display = ('position', 'user')
+@admin.register(Coffee)
+class CoffeeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'position')
 
 
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('rating', 'description')
+
+
+@admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
-
-admin.site.register(Position, PositionAdmin)
-admin.site.register(Event, EventAdmin)
-admin.site.register(Tag, TagAdmin)
