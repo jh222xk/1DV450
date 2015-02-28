@@ -1,14 +1,19 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+
 from rest_framework.fields import CharField
 from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField
 from rest_framework.validators import UniqueValidator
 from rest_framework import serializers
 
-from .models import Position, Event, Tag, Coffee, Review
+from .models import Position, Tag, Coffee, Review
 
 
 class UserSerializer(ModelSerializer):
+
+    """
+    Serializing all the Users
+    """
     url = HyperlinkedIdentityField(view_name='api-v1:user-detail')
     email = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())]
@@ -20,6 +25,9 @@ class UserSerializer(ModelSerializer):
         write_only_fields = ('password',)
 
     def create(self, validated_data):
+        """
+        Hashes the password upon creation
+        """
         user = User(email=validated_data['email'], username=validated_data['username'])
         user.set_password(validated_data['password'])
         user.save()
@@ -46,27 +54,12 @@ class TagSerializer(ModelSerializer):
         return self.context['request'].user
 
 
-class EventSerializer(ModelSerializer):
-
-    """
-    Serializing all the Events
-    """
-
-    tags = TagSerializer(many=True, read_only=True)
-    url = HyperlinkedIdentityField(view_name='api-v1:event-detail')
-
-    class Meta:
-        model = Event
-        fields = ('name', 'url', 'tags')
-
-
 class PositionSerializer(ModelSerializer):
 
     """
     Serializing all the Positions
     """
 
-    #events = EventSerializer(many=True, read_only=True)
     url = HyperlinkedIdentityField(
         view_name='api-v1:position-detail')
 
@@ -76,17 +69,12 @@ class PositionSerializer(ModelSerializer):
 
 
 class ReviewSerializer(ModelSerializer):
-    #coffee_id = serializers.PrimaryKeyRelatedField(read_only=True)
-    #user = serializers.Field(source='user.username')
-    #review = serializers.PrimaryKeyRelatedField()
+    """
+    Serializing all the Reviews
+    """
     url = HyperlinkedIdentityField(view_name='api-v1:review-detail')
     user_url = HyperlinkedIdentityField(view_name='api-v1:user-detail')
     coffee_url = HyperlinkedIdentityField(view_name='api-v1:coffeehouses-detail')
-
-
-    #owner = serializers.HiddenField(
-     #   default=CurrentUserDefault()
-    #)
 
     class Meta:
         model = Review
@@ -98,12 +86,16 @@ class ReviewSerializer(ModelSerializer):
 
 class ReviewCoffee(ModelSerializer):
     user = UserSerializer(many=False)
+
     class Meta:
         model = Review
         fields = ('rating', 'description', 'created_at', 'user',)
 
 
 class CoffeeSerializer(ModelSerializer):
+    """
+    Serializing all the Coffeehouses
+    """
     position = PositionSerializer(many=False, read_only=True)
     reviews = ReviewCoffee(many=True, read_only=True, source='review')
     url = HyperlinkedIdentityField(view_name='api-v1:coffeehouses-detail')
@@ -115,6 +107,9 @@ class CoffeeSerializer(ModelSerializer):
 
 
 class SimpleCoffeeSerializer(ModelSerializer):
+    """
+    A simple coffeehouse with just the URL, used when nesting
+    """
     url = HyperlinkedIdentityField(view_name='api-v1:coffeehouses-detail')
 
     class Meta:
@@ -123,6 +118,9 @@ class SimpleCoffeeSerializer(ModelSerializer):
 
 
 class NestedReviewSerializer(ModelSerializer):
+    """
+    A nested review with just the URL and the coffeehouse, used when nesting
+    """
     coffeehouse = SimpleCoffeeSerializer(source='coffee')
     url = HyperlinkedIdentityField(view_name='api-v1:review-detail')
 

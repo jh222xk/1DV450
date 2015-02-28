@@ -1,0 +1,1588 @@
+{
+	"id": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+	"name": "API",
+	"description": "Toerh API - Webbramverk",
+	"order": [
+		"9a6a6a78-ba0b-1004-2ce7-79aacf66234c",
+		"f887e676-8f13-eb91-05aa-2bdbbba9e4ae",
+		"72924e94-5b1d-2a14-a5a9-7031c8a15a0b",
+		"80ba657d-ed20-bfab-5eb6-aaefe6c0d586",
+		"82d43a43-7ec8-39f7-9503-e93cc8c6a93e",
+		"25fc3bc3-0a3d-24a7-6c93-e33ffcf08da4",
+		"a8a2d516-c1d8-956f-c506-75b0e7d4b578",
+		"12d2aa3c-92f5-521b-d208-8606745c4c67",
+		"f5b81b60-46da-1534-67d6-27c92aefd7a4",
+		"67cdd9e8-2e3e-0e97-9b9b-429db8451df9",
+		"fb39acf1-7aab-a70e-bdc3-09bf9e476f30",
+		"fbd453b3-2e32-9c83-1eff-36a187b5dccd",
+		"491f0a6a-89aa-a5e9-25fd-ae5bd78d5c8d",
+		"4f1d0940-8f44-29c3-6b34-53d56104dec8",
+		"58cc0611-59bc-f873-4c19-cd18c53f337e",
+		"769e3fd1-b270-5dae-05db-7fe033dc93b6",
+		"fd33c7c5-fa4e-1879-dedb-aad5e2d5e485",
+		"a129b55e-ceba-e1d1-66ad-aa769ef3ed4f",
+		"450d6a6d-9bd5-50cd-f0f5-9d80ef4a3920",
+		"9cefc97e-3350-23cf-0b10-2aba3af7ebe3",
+		"1903d597-17c3-c28d-2d1f-12d8353ac01b",
+		"a2314109-947d-0d9a-1d06-20525738d2f4",
+		"d409b23e-c4f9-ea07-af32-33de2d97ef27",
+		"d1ca729a-93e3-bd11-0bfd-88ba9f38dfad",
+		"2bfb9a2b-0c93-c394-850d-ef645992aa98",
+		"ad00970b-1852-08ca-097d-44214eca298a",
+		"c3af0e37-5b78-2179-9128-5865c15568d7",
+		"bdd21a81-dda7-ef0c-3c22-646071cb82d7",
+		"981ff984-7891-b8f3-0b95-eae862dfb672",
+		"9f82535d-6bd8-7dbf-5fbd-f3ce30dadcbf",
+		"2e97581a-03fd-fcf3-2382-1373d72f558b",
+		"eb73cb01-c134-7431-8835-24bd9caf374d",
+		"35fed63f-57ec-8a59-e06e-a953b168d945",
+		"07e0d386-89be-5dd5-b56b-4fcab6b515b9",
+		"5a39643f-65e4-3b8c-fa30-b1019942170e",
+		"903b483b-5308-f14f-60c9-cec1b78eebe5",
+		"bd929444-815f-b99c-8c9f-1962daccd2a3",
+		"fe153013-2011-7a88-df42-1c11f2ba2fa4",
+		"db86fe9f-1eb6-3c41-b261-3c41db017101",
+		"31fdcdca-b68c-f0c5-84de-0da105bce288",
+		"ae040f3d-6a16-9da5-f815-8264a33895ef"
+	],
+	"folders": [],
+	"timestamp": 1425163020553,
+	"synced": false,
+	"remoteLink": "",
+	"requests": [
+		{
+			"id": "07e0d386-89be-5dd5-b56b-4fcab6b515b9",
+			"headers": "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZXhwIjoxNDI0OTQxNzQxLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.UrQYN4malN2tlHEyprC6n4Ro1F1472v94EdajGj49rY\n",
+			"url": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [
+				{
+					"key": "description",
+					"value": "Ben and jerry's is an awesome place!",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "rating",
+					"value": "3",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "coffee",
+					"value": "2",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164069374,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "12d2aa3c-92f5-521b-d208-8606745c4c67",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/tags/2/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/tags/2/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163848257,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "1903d597-17c3-c28d-2d1f-12d8353ac01b",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=username",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=username",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163976925,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "25fc3bc3-0a3d-24a7-6c93-e33ffcf08da4",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&page_size=100",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&page_size=100",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163832351,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "2bfb9a2b-0c93-c394-850d-ef645992aa98",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=is_active",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=is_active",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164006607,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "2e97581a-03fd-fcf3-2382-1373d72f558b",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/auth/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/auth/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164046815,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "31fdcdca-b68c-f0c5-84de-0da105bce288",
+			"headers": "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE0MjQ5NDU4ODAsInVzZXJfaWQiOjF9.o1QCa5EBCNb1TW4NKT1elwH8OcMVcFYJiZYz-fDVxBw\n",
+			"url": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesper",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164103181,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "35fed63f-57ec-8a59-e06e-a953b168d945",
+			"headers": "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZXhwIjoxNDI0OTQxNzQxLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.UrQYN4malN2tlHEyprC6n4Ro1F1472v94EdajGj49rY\n",
+			"url": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164061280,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "450d6a6d-9bd5-50cd-f0f5-9d80ef4a3920",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/1/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/1/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163956609,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "491f0a6a-89aa-a5e9-25fd-ae5bd78d5c8d",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163908036,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "4f1d0940-8f44-29c3-6b34-53d56104dec8",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/reviews/1/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/reviews/1/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163916220,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "58cc0611-59bc-f873-4c19-cd18c53f337e",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=rating",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=rating",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163924665,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "5a39643f-65e4-3b8c-fa30-b1019942170e",
+			"headers": "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZXhwIjoxNDI0OTQxNzQxLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.UrQYN4malN2tlHEyprC6n4Ro1F1472v94EdajGj49rY\n",
+			"url": "http://localhost:8000/api/v1/reviews/14?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "PUT",
+			"data": [
+				{
+					"key": "description",
+					"value": "Ben and jerry's is NOT an awesome place!",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "rating",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "coffee",
+					"value": "2",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/reviews/14?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164075866,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "67cdd9e8-2e3e-0e97-9b9b-429db8451df9",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=created_at",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=created_at",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163881341,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "72924e94-5b1d-2a14-a5a9-7031c8a15a0b",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=-created_at",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=-created_at",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163807768,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "769e3fd1-b270-5dae-05db-7fe033dc93b6",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=description",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=description",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163932908,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "80ba657d-ed20-bfab-5eb6-aaefe6c0d586",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=address",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=address",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163814837,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "82d43a43-7ec8-39f7-9503-e93cc8c6a93e",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&page=2",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&page=2",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163822823,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "903b483b-5308-f14f-60c9-cec1b78eebe5",
+			"headers": "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZXhwIjoxNDI0OTQxNzQxLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.UrQYN4malN2tlHEyprC6n4Ro1F1472v94EdajGj49rY\n",
+			"url": "http://localhost:8000/api/v1/reviews/14?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/reviews/14?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164082311,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "981ff984-7891-b8f3-0b95-eae862dfb672",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/coffeehouses/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&longitude=56.6604584&latitude=16.3484457",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/coffeehouses/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&longitude=56.6604584&latitude=16.3484457",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164033783,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "9a6a6a78-ba0b-1004-2ce7-79aacf66234c",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/positions/1/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/positions/1/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163790157,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "9cefc97e-3350-23cf-0b10-2aba3af7ebe3",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163968405,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "9f82535d-6bd8-7dbf-5fbd-f3ce30dadcbf",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/coffeehouses/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&longitude=56.6604584&latitude=16.3484457&query=espresso",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/coffeehouses/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&longitude=56.6604584&latitude=16.3484457&query=espresso",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164040560,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "a129b55e-ceba-e1d1-66ad-aa769ef3ed4f",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163949387,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "a2314109-947d-0d9a-1d06-20525738d2f4",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=email",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=email",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163984351,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "a8a2d516-c1d8-956f-c506-75b0e7d4b578",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163840354,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "ad00970b-1852-08ca-097d-44214eca298a",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/active/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/active/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164013341,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "ae040f3d-6a16-9da5-f815-8264a33895ef",
+			"headers": "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE0MjQ5Nzc5ODcsImVtYWlsIjoiYXNkYXNkYXNkQGFzZGFzZC5zZSIsInVzZXJuYW1lIjoiYXNkIn0.MPtbpf5REvhCQTCrqrQZ3-3GpiatkNO79aE94upXSfU\n",
+			"url": "http://localhost:8000/api/v1/users/1?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "PUT",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/1?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164108537,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "bd929444-815f-b99c-8c9f-1962daccd2a3",
+			"headers": "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZXhwIjoxNDI0OTQyMDk0LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.OSyKlzGwqqZugaYbdZvXeQIfPMtmomiLnfGnE7_em-k\n",
+			"url": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "#benandjerrys",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164088004,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "bdd21a81-dda7-ef0c-3c22-646071cb82d7",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/coffeehouses/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/coffeehouses/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164026881,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "c3af0e37-5b78-2179-9128-5865c15568d7",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/un_active/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/un_active/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164020444,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "d1ca729a-93e3-bd11-0bfd-88ba9f38dfad",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=last_login",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=last_login",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163999258,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "d409b23e-c4f9-ea07-af32-33de2d97ef27",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=date_joined",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/users/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=date_joined",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163991403,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "db86fe9f-1eb6-3c41-b261-3c41db017101",
+			"headers": "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZXhwIjoxNDI0OTQyMDk0LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.OSyKlzGwqqZugaYbdZvXeQIfPMtmomiLnfGnE7_em-k\n",
+			"url": "http://localhost:8000/api/v1/tags/6/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/tags/6/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164097330,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "eb73cb01-c134-7431-8835-24bd9caf374d",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/auth/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [
+				{
+					"key": "username",
+					"value": "admin",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "admin",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/auth/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164053759,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "f5b81b60-46da-1534-67d6-27c92aefd7a4",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/tags/2/coffeehouses/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/tags/2/coffeehouses/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163865985,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "f887e676-8f13-eb91-05aa-2bdbbba9e4ae",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=created_at",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/positions/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=created_at",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163799339,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "fb39acf1-7aab-a70e-bdc3-09bf9e476f30",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=-created_at",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=-created_at",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163889248,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "fbd453b3-2e32-9c83-1eff-36a187b5dccd",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=name",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/tags/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=name",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163898760,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "fd33c7c5-fa4e-1879-dedb-aad5e2d5e485",
+			"headers": "",
+			"url": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=coffee",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "username",
+					"value": "jesperhakansson",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "jesper@student.se",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "asd",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/reviews/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259&ordering=coffee",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425163941084,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		},
+		{
+			"id": "fe153013-2011-7a88-df42-1c11f2ba2fa4",
+			"headers": "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwiZXhwIjoxNDI0OTQyMDk0LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSJ9.OSyKlzGwqqZugaYbdZvXeQIfPMtmomiLnfGnE7_em-k\n",
+			"url": "http://localhost:8000/api/v1/tags/6/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "PUT",
+			"data": [
+				{
+					"key": "name",
+					"value": "#benandjerryssucks",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://localhost:8000/api/v1/tags/6/?key=1eed145f5d9c50c5b3616b759ec9e2a6a3bac259",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425164092654,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "07c13c0e-a426-fcd9-2866-8564b41543b8",
+			"synced": false
+		}
+	]
+}

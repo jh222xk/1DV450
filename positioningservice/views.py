@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 
-from pyelasticsearch import ElasticSearch, ElasticHttpNotFoundError
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, ListModelMixin
 from rest_framework.mixins import UpdateModelMixin
 from rest_framework.permissions import IsAuthenticated
@@ -12,6 +11,7 @@ from rest_framework.decorators import detail_route, list_route
 from .models import Position, Tag, Coffee, Review
 from .authentications import SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication, IsOwner, IsLoggedInAs, \
     SafeTokenUserCreationAuthentication
+from .indexes import SearchIndex
 from .serializers import PositionSerializer, TagSerializer, CoffeeSerializer, UserSerializer, \
     ReviewSerializer, NestedReviewSerializer
 
@@ -22,90 +22,10 @@ class CoffeeViewSet(ReadOnlyModelViewSet):
     filter_backends = (OrderingFilter,)
     ordering_fields = ('name', 'address', 'created_at')
 
-
-    def search(self, question, longitude, latitude):
-        index = 'toerh_coffee'
-        es = ElasticSearch()
-        try:
-            es.delete_index(index)
-        except (AttributeError, ElasticHttpNotFoundError):
-            pass
-
-        mapping = {
-            "place": {
-                "properties": {
-                    "location": {
-                        "type": "geo_point",
-                        # "lat_lon": True
-                    },
-                }
-            }
-        }
-
-        es.create_index(index)
-        es.put_mapping(index, "place", mapping)
-        for c in Coffee.objects.all():
-            es.bulk([
-                        es.index_op({
-                            'pk': c.pk,
-                            'name': c.name,
-                            'rating': c.rating,
-                            'location': {
-                                'lon': c.position.longitude,
-                                'lat': c.position.latitude
-                            }
-                        }),
-                    ],
-                    doc_type='place',
-                    index=index)
-
-        query = {
-            'query': {
-                'function_score': {
-                    'query': {
-                        'bool': {
-                            'should': [
-                                {'match': {'name': question}},
-                                {'match': {'_all': {
-                                    'query': question,
-                                    'operator': 'or',
-                                    'fuzziness': 'auto',
-                                    'zero_terms_query': 'all'
-                                }}}
-                            ]
-                        }
-                    },
-                    'functions': [
-                        {'exp': {'rating': {'origin': 5, 'scale': 1, 'offset': 0.1}}},
-                    ]
-                }
-            }
-        }
-
-        if longitude and longitude is not None:
-            query['query']['function_score']['functions'] = [
-                # {'exp': {'rating': {'origin': 5, 'scale': 1, 'offset': 0.1}}},
-                # {'gauss': {'location': {'origin': 'location', 'scale': '250m', 'offset': '50m'}}},
-                {'gauss': {
-                    "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "50m",
-                                 "scale": "250m"}
-                }},
-                {'gauss': {
-                    "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "50m",
-                                 "scale": "500m"}
-                },
-                },
-            ]
-
-        # print(query)
-
-        es.refresh()
-
-        results = es.search(query, index=index)
-
-        return results
-
     def get_queryset(self):
+        index = 'toerh_coffee'
+        es = SearchIndex(model=Coffee)
+
         try:
             pk = self.kwargs['pk']
         except KeyError:
@@ -120,19 +40,12 @@ class CoffeeViewSet(ReadOnlyModelViewSet):
 
             query = self.request.query_params.get('query', "")
 
-            # use LONGITUDE, LATITUDE
-            results = self.search(question=query, longitude=longitude, latitude=latitude)
+            # Call on our elasticsearch's search
+            results = es.search(index=index, question=query, longitude=longitude, latitude=latitude)
 
             hits = results['hits']['hits']
 
-            # print(hits)
-
-            # for x in hits:
-            # print(x['_source'])
-
-            # {'_score': 0.79549515, '_type': 'place', '_id': '3eVjFTuQQ3yxtSiOXjB7MQ', '_index': 'toerh_coffee',
-            # '_source': {'name': 'Espresso House', 'location': {'lat': 16.326955, 'lon': 56.6874601}}}
-
+            # Query the database after the search result
             queryset = list(Coffee.objects.filter(id__in=[r['_source']['pk'] for r in hits]))
 
             # SORT IT

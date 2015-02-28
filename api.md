@@ -1,6 +1,9 @@
 API calls
 =========
 
+# JSON WebToken
+
+
 # Positions
 
 ## Default
@@ -14,9 +17,6 @@ http://localhost:8000/api/v1/positions/?key=YOUR_KEY&ordering=created_at
 
 ## Ordering DESC
 http://localhost:8000/api/v1/positions/?key=YOUR_KEY&ordering=-created_at
-
-## Ordering by name
-http://localhost:8000/api/v1/positions/?key=YOUR_KEY&ordering=name
 
 ## Ordering by address
 
@@ -45,10 +45,6 @@ http://localhost:8000/api/v1/tags/?key=YOUR_KEY&ordering=-created_at
 
 ## Ordering by name
 http://localhost:8000/api/v1/tags/?key=YOUR_KEY&ordering=name
-
-## Ordering by created_at
-
-http://localhost:8000/api/v1/tags/?key=YOUR_KEY&ordering=created_at
 
 ## Pages
 
