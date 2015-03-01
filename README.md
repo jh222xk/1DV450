@@ -6,6 +6,13 @@ Webbramverk - 1DV450
 
 [![Coverage Status](https://coveralls.io/repos/jh222xk/toerh/badge.svg)](https://coveralls.io/r/jh222xk/toerh)
 
+# API
+
+See [api.md](https://github.com/jh222xk/toerh/blob/master/api.md)
+
+## Postman
+Postman collection can be found [here](https://github.com/jh222xk/toerh/blob/master/API.json.postman_collection)
+
 # Run the application
 
 ## Live

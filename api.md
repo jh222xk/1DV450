@@ -3,6 +3,11 @@ API calls
 
 # JSON WebToken
 
+For posting, putting and deleting you need a valid JSON WebToken. Go to:
+http://localhost:8000/api/v1/auth/
+
+and send username and password with the request
+
 
 # Positions
 
