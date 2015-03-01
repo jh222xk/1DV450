@@ -65,7 +65,7 @@ class PositionSerializer(ModelSerializer):
 
     class Meta:
         model = Position
-        fields = ('address', 'longitude', 'latitude', 'url', 'created_at',)
+        fields = ('longitude', 'latitude', 'url', 'created_at',)
 
 
 class ReviewSerializer(ModelSerializer):
