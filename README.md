@@ -22,6 +22,10 @@ http://128.199.44.244:1337/
 ## Get the project
 First of all clone this repository: `git clone https://github.com/jh222xk/toerh.git`
 
+## Elasticsearch
+You'll need to have elasticsearch installed.
+http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_installing_elasticsearch.html
+
 ## Dependencies
 [Python version >= 3.0](https://www.python.org/downloads/)
 
