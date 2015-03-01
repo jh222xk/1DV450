@@ -34,7 +34,8 @@ class SearchIndex(object):
                 doc_type=doc_type,
                 index=index)
 
-    def search(self, index, question, longitude, latitude):
+    def search(self, index, question, longitude, latitude, size=10):
+        #self.es.delete_index(index)
         try:
             self.es.create_index(index)
             self.put_mapping(index, "place")
@@ -55,15 +56,15 @@ class SearchIndex(object):
                                     "fuzziness": "auto",
                                     "zero_terms_query": "all"
                                     }}}
-                                    ]
-                                }
-                            },
-                        "functions": [
-                            {"exp": {"rating": {"origin": 5, "scale": 1, "offset": 0.1}}},
-                        ]
-                        }
+                                ]
+                            }
+                        },
+                    "functions": [
+                        {"exp": {"rating": {"origin": 5, "scale": 1, "offset": 0.1}}},
+                    ]
                     }
                 }
+            }
 
         if longitude and longitude is not None:
             query['query']['function_score']['functions'] = [
@@ -75,7 +76,7 @@ class SearchIndex(object):
                     }},
             ]
 
-        results = self.es.search(query, index=index)
+        results = self.es.search(query, index=index, size=size)
 
         self.es.refresh()
 

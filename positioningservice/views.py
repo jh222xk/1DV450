@@ -19,8 +19,6 @@ from .serializers import PositionSerializer, TagSerializer, CoffeeSerializer, Us
 class CoffeeViewSet(ReadOnlyModelViewSet):
     serializer_class = CoffeeSerializer
     authentication_classes = (SafeTokenAuthentication, UnsafeJSONWebTokenAuthentication)
-    filter_backends = (OrderingFilter,)
-    ordering_fields = ('name', 'address', 'created_at')
 
     def get_queryset(self):
         index = 'toerh_coffee'
@@ -41,12 +39,12 @@ class CoffeeViewSet(ReadOnlyModelViewSet):
             query = self.request.query_params.get('query', "")
 
             # Call on our elasticsearch's search
-            results = es.search(index=index, question=query, longitude=longitude, latitude=latitude)
+            results = es.search(index=index, question=query, longitude=longitude, latitude=latitude, size=50)
 
             hits = results['hits']['hits']
 
             # Query the database after the search result
-            queryset = list(Coffee.objects.filter(id__in=[r['_source']['pk'] for r in hits]))
+            queryset = list(Coffee.objects.filter(pk__in=[r['_source']['pk'] for r in hits]))
 
             # SORT IT
             queryset.sort(key=lambda t: [int(r['_source']['pk']) for r in hits].index(t.pk))
@@ -131,7 +129,6 @@ class ReviewViewSet(ModelViewSet):
     serializer_class = ReviewSerializer
     filter_backends = (OrderingFilter,)
     ordering_fields = ('rating', 'description', 'coffee', 'created_at')
-
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
