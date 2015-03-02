@@ -1,12 +1,8 @@
-import base64
-from json import loads
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from rest_framework.test import APITestCase
-from rest_framework import status
-from rest_framework.authtoken.models import Token
+from ..models import Token
 
 
 class TokenTest(TestCase):
