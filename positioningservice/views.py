@@ -32,7 +32,7 @@ class CoffeeViewSet(ReadOnlyModelViewSet):
             try:
                 latitude = float(self.request.query_params.get('latitude'))
                 longitude = float(self.request.query_params.get('longitude'))
-            except TypeError:
+            except:
                 longitude = None
                 latitude = None
 
