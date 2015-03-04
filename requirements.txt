@@ -7,6 +7,7 @@ pyelasticsearch
 # API
 djangorestframework
 djangorestframework-jwt
+django-filter
 
 # Testing
 factory_boy
@@ -16,3 +17,7 @@ django-nose
 coveralls
 fake-factory
 django-debug-toolbar
+
+# sqlparse should be installed by django-debug-toolbar but
+# in some cases it does not so lets include it here.
+sqlparse

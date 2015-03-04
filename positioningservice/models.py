@@ -3,7 +3,6 @@ import json
 from django.conf import settings
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
-from django.contrib.gis.geos import Point
 from django.db.models import Avg
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models.signals import post_save
@@ -22,10 +21,6 @@ class Position(models.Model):
 
     def __str__(self):
         return "[%s, %s]" % (self.longitude, self.latitude)
-
-    @property
-    def geo_location(self):
-        return Point(self.latitude, self.longitude)
 
 
 class Tag(models.Model):
@@ -76,9 +71,6 @@ class Coffee(models.Model):
         geo = urllib.request.urlopen(
             "https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=%s" % address)
         return geo.readall().decode('utf-8')
-
-    def get_location(self):
-        return Point(self.position.latitude, self.position.longitude)
 
     @property
     def rating(self):
