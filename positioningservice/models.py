@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.contrib.gis.geos import Point
 from django.db.models import Avg
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models.signals import post_save
 
 from .signals import update_index
@@ -92,7 +93,7 @@ class Coffee(models.Model):
 
 
 class Review(models.Model):
-    rating = models.FloatField()
+    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     coffee = models.ForeignKey(Coffee, related_name='review')
     description = models.TextField()
     user = models.ForeignKey(AUTH_USER_MODEL)
