@@ -63,7 +63,7 @@ class PositionViewSet(ReadOnlyModelViewSet):
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
     filter_backends = (OrderingFilter,)
-    ordering_fields = ('address', 'created_at',)
+    ordering_fields = ('created_at',)
 
 
 class TagViewSet(ModelViewSet):
