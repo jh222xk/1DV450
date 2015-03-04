@@ -239,4 +239,4 @@ class TagTest(UserAPITestCase):
         # Check that our data is what it should be
         self.assertEqual(response_data['name'], "#guldveckan")
         self.assertEqual(
-            urlparse(response_data['url']).path, reverse('api-v1:tag-detail', kwargs={'pk': 1}))
+            urlparse(response_data['links']['self']).path, reverse('api-v1:tag-detail', kwargs={'pk': 1}))
