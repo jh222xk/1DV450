@@ -19,8 +19,19 @@ Postman collection can be found [here](https://github.com/jh222xk/toerh/blob/mas
 If you can't get python to run nicely on windows or such you can view the application here:
 http://128.199.44.244:1337/
 
+*This is now updated and works fine.*
+
 ## Get the project
 First of all clone this repository: `git clone https://github.com/jh222xk/toerh.git`
+
+You also need to set `TOERH_DJANGO_SECRET_KEY`
+
+You can set it like this in unix-systems:
+
+`export TOERH_DJANGO_SECRET_KEY='@v9c-4ymi$o6xk@m24c5hy5)7vrme6_qk_pbd*7+p(!trld@o%'`
+
+(You can use that key since it's used for Travis).
+
 
 ## Elasticsearch
 You'll need to have elasticsearch installed.
@@ -66,14 +77,6 @@ EventFactory.create(tags=(tag1, tag2))
 After import type: `TagFactory()` and a tag will be created.
 
 ## Run it
-
-Before you run it you need to set `TOERH_DJANGO_SECRET_KEY`
-
-You can set it like this in unix-systems:
-
-`export TOERH_DJANGO_SECRET_KEY='@v9c-4ymi$o6xk@m24c5hy5)7vrme6_qk_pbd*7+p(!trld@o%'`
-
-(You can use that key since it's used for Travis).
 
 locate to `path/to/toerh/` then just run Python's built-in server using the command: `python manage.py runserver` and the application will be served at `http://localhost:8000/`
 
