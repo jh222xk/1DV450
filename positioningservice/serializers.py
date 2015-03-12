@@ -99,7 +99,7 @@ class ReviewSerializer(ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ('rating', 'description', 'coffee', 'links')
+        fields = ('id', 'rating', 'description', 'coffee', 'links')
         write_only_fields = ('coffee',)
 
     def get_links(self, obj):
