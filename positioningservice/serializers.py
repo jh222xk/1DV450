@@ -124,7 +124,7 @@ class ReviewCoffee(ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ('rating', 'description', 'created_at', 'user',)
+        fields = ('id', 'rating', 'description', 'created_at', 'user',)
 
 
 class CoffeeSerializer(ModelSerializer):
