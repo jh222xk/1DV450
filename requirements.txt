@@ -7,7 +7,7 @@ pillow
 pyelasticsearch
 
 # API
-djangorestframework
+djangorestframework==3.0.3
 djangorestframework-jwt
 django-filter
 django-cors-headers
