@@ -8,6 +8,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+USE_ETAGS = True
+
 # Throw error if we haven't set the TOERH_DJANGO_SECRET_KEY in the environment
 assert 'TOERH_DJANGO_SECRET_KEY' in os.environ, 'Set TOERH_DJANGO_SECRET_KEY in your environment!'
 SECRET_KEY = os.environ['TOERH_DJANGO_SECRET_KEY']
@@ -54,6 +56,9 @@ JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
 }
 
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True
+
 # Use nose to run all tests
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
@@ -74,6 +79,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Third party apps
+    'corsheaders',
     'rest_framework',
     'django_nose',
     'debug_toolbar',
@@ -86,6 +92,7 @@ INSTALLED_APPS = (
 
 # Middleware classes
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -116,6 +123,9 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'

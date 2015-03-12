@@ -25,6 +25,8 @@ class SearchIndex(object):
                     "pk": m.pk,
                     "name": m.name,
                     "rating": m.rating,
+                    "address": m.address,
+                    "description": m.description,
                     "location": {
                         "lon": m.position.longitude,
                         "lat": m.position.latitude
@@ -69,10 +71,10 @@ class SearchIndex(object):
         if longitude and longitude is not None:
             query['query']['function_score']['functions'] = [
                 {'gauss': {
-                    "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "50m", "scale": "250m"}
+                    "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "550m", "scale": "1km"}
                     }},
                 {'gauss': {
-                    "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "50m", "scale": "500m"}
+                    "location": {"origin": {"lat": latitude, "lon": longitude}, "offset": "500m", "scale": "2km"}
                     }},
             ]
 

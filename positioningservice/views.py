@@ -128,7 +128,7 @@ class ReviewViewSet(ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     filter_backends = (OrderingFilter,)
-    ordering_fields = ('rating', 'description', 'coffee', 'created_at')
+    ordering_fields = ('rating', 'description', 'created_at')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

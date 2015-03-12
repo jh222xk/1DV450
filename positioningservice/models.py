@@ -1,5 +1,7 @@
+import os
 import urllib
 import json
+import uuid
 from django.conf import settings
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
@@ -11,6 +13,12 @@ from .signals import update_index
 
 
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+
+
+def content_file_name(filename):
+    file_name, ext = os.path.splitext(filename)
+    new_name = uuid.uuid4()
+    return '/'.join(['pictures', new_name.hex + ext])
 
 
 class Position(models.Model):
@@ -39,6 +47,8 @@ class Tag(models.Model):
 class Coffee(models.Model):
     name = models.CharField(max_length=128)
     address = models.CharField(max_length=200)
+    description = models.TextField()
+    image = models.ImageField(upload_to=content_file_name, default='media/pictures/no-image.jpg')
     position = models.ForeignKey(Position)
     tags = models.ManyToManyField(Tag)
     created_at = models.DateTimeField(auto_now_add=True)

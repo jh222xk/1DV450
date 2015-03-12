@@ -99,7 +99,8 @@ class ReviewSerializer(ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ('rating', 'description', 'links',)
+        fields = ('rating', 'description', 'coffee', 'links')
+        write_only_fields = ('coffee',)
 
     def get_links(self, obj):
         request = self.context['request']
@@ -134,10 +135,11 @@ class CoffeeSerializer(ModelSerializer):
     reviews = ReviewCoffee(many=True, read_only=True, source='review')
     links = serializers.SerializerMethodField()
     tags = TagSerializer(many=True)
+    image = serializers.ImageField(max_length=None, allow_empty_file=False, use_url=True)
 
     class Meta:
         model = Coffee
-        fields = ('name', 'rating', 'links', 'description', 'position', 'tags', 'reviews',)
+        fields = ('id', 'name', 'address', 'rating', 'links', 'description', 'position', 'image', 'tags', 'reviews',)
 
     def get_links(self, obj):
         request = self.context['request']

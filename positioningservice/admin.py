@@ -11,7 +11,7 @@ class PositionAdmin(admin.ModelAdmin):
 @admin.register(Coffee)
 class CoffeeAdmin(admin.ModelAdmin):
     list_display = ('name', 'position')
-    fields = ('name', 'address', 'tags',)
+    fields = ('name', 'address', 'description', 'tags',)
 
 
 @admin.register(Review)

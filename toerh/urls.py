@@ -6,6 +6,7 @@ from rest_framework import routers
 from accounts.views import SignUpFormView
 from positioningservice.views import PositionViewSet, TagViewSet, CoffeeViewSet, UserViewSet, \
     ReviewViewSet
+from toerh import settings
 
 
 router = routers.DefaultRouter()
@@ -16,6 +17,8 @@ router.register(r'reviews', ReviewViewSet)
 router.register(r'coffeehouses', CoffeeViewSet, base_name='coffeehouses')
 
 template_name = {'template_name': 'rest_framework/login.html'}
+
+from django.conf.urls.static import static
 
 urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
@@ -39,3 +42,9 @@ urlpatterns = patterns('',
 
                        # API endpoint version 2 could be here
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT, }),
+    )

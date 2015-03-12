@@ -1,6 +1,8 @@
 # Django version
 django>=1.7
 
+pillow
+
 # Elasticsearch
 pyelasticsearch
 
